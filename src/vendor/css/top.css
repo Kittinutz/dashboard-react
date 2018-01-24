@@ -1,0 +1,38 @@
+.sdow-nav{
+    box-shadow: -1px 1px 1em 5px rgba(19, 209, 230, 0.904);
+}
+
+.sdow-sidenav{
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgb(22, 22, 22);
+    margin: -10px;
+}
+
+.sdow-box{
+
+    box-shadow: 0px 0px 10px 0px rgb(22, 22, 22);
+    margin: -10px;
+}
+
+.t-nav ,.nav-link-tx{
+    color: white;
+    text-shadow: 0 1px 5px rgb(66, 66, 66);
+}
+
+.tx-white{
+    color: aliceblue;
+
+}col
+
+.v-full{
+    height:100vh;
+}
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+.sidenav {
+    height: auto;
+    padding: 15px;
+}
+.row.content {height:auto;} 
+}
+

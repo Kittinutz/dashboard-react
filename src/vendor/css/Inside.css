@@ -1,0 +1,18 @@
+.table-mini{
+    width: 3em;
+    text-align: center;
+}
+
+.table-Lmini{
+    width: 5em;
+    text-align: center;
+}
+
+.btn-table{
+    text-align: center;
+    padding-top: 0px  !important;
+    padding-bottom: 0px !important;
+}
+.tbinfo-center{
+    padding-top: 5000px;
+}
