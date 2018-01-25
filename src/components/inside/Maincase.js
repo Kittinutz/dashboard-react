@@ -2,12 +2,18 @@ import React, { Component } from 'react'
 import { 
   Table, Button
  } from 'reactstrap';
+
+import io from 'socket.io-client';
+const socket = io.connect('localhost:4000');
 class Maincase extends Component {
+  runTest(){
+    socket.emit('run test');
+  }
   render() {
     return (
       <div className="card mb-3 bg-dark sdow-box">
         <div className="card-header">
-          <i className="fa fa-area-chart"></i>Area Chart Example
+          <i className="fa fa-area-chart"></i> Main Case Table
         </div>
         <div className="bg-svdark">
             <Table striped>
@@ -25,7 +31,7 @@ class Maincase extends Component {
               <tbody>
                 <tr>
                   <th scope="row">1</th>
-                  <td><Button color="danger" className="btn-table">RUN</Button></td>
+                  <td><Button color="danger" className="btn-table" onClick={this.runTest.bind(this)}>RUN</Button></td>
                   <td>Otto</td>
                   <td>@mdo</td>
                   <td>Mark</td>
