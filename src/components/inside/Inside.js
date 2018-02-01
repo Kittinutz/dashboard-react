@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-import Maincase from './Maincase';
+import Index from './table-all-case/Index';
 
 class Inside extends Component {
   render() {
     return (
       <div className="content-wrapper">
         <div className="container-fluid">    
-          <Maincase />
+          <Index />
           <div className="row">
           </div>
         </div>

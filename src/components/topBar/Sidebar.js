@@ -8,19 +8,19 @@ class Sidebar extends Component {
               <li className="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
                 <a className="nav-link" >
                   <i className="fa fa-fw fa-dashboard"></i>
-                  <span className="nav-link-tx">Dashboard</span>
+                  <span className="nav-link-tx">DashBoard</span>
                 </a>
               </li>
               <li className="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
                 <a className="nav-link" >
                   <i className="fa fa-fw fa-area-chart"></i>
-                  <span className="nav-link-tx">Projects</span>
+                  <span className="nav-link-tx">PROJECTs :</span>
                 </a>
               </li>
               <li className="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
                 <a className="nav-link" >
                   <i className="fa fa-fw fa-table"></i>
-                  <span className="nav-link-tx">Test Table</span>
+                  <span className="nav-link-tx">TESTs Table</span>
                 </a>
               </li>     
               <li className="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
