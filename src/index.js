@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-import {startLaravelDuskTest} from './components/startLaravelDuskTest';
-
+// import {startLaravelDuskTest} from './components/startLaravelDuskTest';
+import {socket} from './components/socketIO';
 //topcss
 import './vendor/css/top.css';
 import './vendor/css/Inside.css';
@@ -71,21 +71,13 @@ const logger=(store)=>(next)=>(action)=>{
 //multiple stores
 const store=createStore(combineReducers({runTestR: runTestReducer, getFiles: getNameFilesTest}), {},applyMiddleware(logger));
 
-// store.subscribe(()=>{
-//     var st = store.getState();
-//     // if(st.runTestR.run === true){
-//         // startLaravelDuskTest(st.runTestR.nameTest);
-//         console.log(st.getFiles.nameTest[0])
-//     // }  
-// });
-
 store.subscribe(()=>{
     console.log(store.getState());
 });
 
 store.dispatch({
     type:"getAllFiles",
-    payload: ["TC01loginTest", "Test","sdsd"]
+    payload: ["TC01loginTest", "TCXXTEST"]
 });
 
 ReactDOM.render(

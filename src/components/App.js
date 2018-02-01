@@ -7,17 +7,12 @@ import Inside from './inside/Inside'
 // for top css
 
 class App extends Component {
-  componentWillMount(){
-    var filesArray = this.props.getFiles.nameTest;
+  componentDidMount(){
     socket.on('getNameFiles', function(nameFiles){
       nameFiles.map((nameFiles)=>
-      filesArray.push(nameFiles)
+        console.log(nameFiles)
       )
     });
-    // console.log(filesArray);
-    // this.props.getFiles.nameTest= ["dsdsd","sdsd"]
-    // console.log(this.props.getFiles.nameTest)
-    // ()=>this.props.getAllFile(filesArray);
   }
   render() {
     return (

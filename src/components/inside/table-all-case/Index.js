@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux";
 import { 
-  Table, Card, CardTitle
+  Card, CardTitle
  } from 'reactstrap';
 
 import TableInfo from './TableInfo'; 
@@ -16,6 +16,7 @@ class Index extends Component {
         </div>
         <div className="bg-svdark">
           <TableInfo nameFiles={this.props.getFiles.nameTest} />
+          {/* <TableInfo/> */}
         </div>
         <div className="card-footer small text-muted">Updated yesterday at 11:59 PM
         </div>

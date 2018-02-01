@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {socket} from '../socketIO';
+import {connect} from "react-redux";
 import { 
    Button, Popover, PopoverBody, PopoverHeader
  } from 'reactstrap';
@@ -23,7 +24,7 @@ class RunConf extends Component {
   
   run1Test(){
     this.toggle();
-    // socket.emit('run test');
+    socket.emit('runTest',"");
   }
 
   render() {
@@ -48,4 +49,22 @@ class RunConf extends Component {
   }
 }
 
-export default RunConf;
+const mapDispatchtoProp=(dispatch)=>{ 
+  return {
+    getNameFile:(nameFiles)=>{
+      dispatch({
+        type: "getAllFiles",
+        payload: nameFiles 
+      })
+    },
+    startTest:(nameFiles)=>{
+      dispatch({
+        type:"",
+        payload: nameFiles
+      })
+    }
+  }
+}
+
+export default connect(mapDispatchtoProp) (RunConf);
+// export default RunConf;

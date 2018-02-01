@@ -20,6 +20,7 @@ class TableInfo extends Component {
         </tr>
       )
     })
+    console.log(nameTest)
     return (
       <Table striped>
         <thead>
