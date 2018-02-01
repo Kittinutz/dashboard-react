@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {connect} from "react-redux";
 import { 
   Table, Card, CardTitle
  } from 'reactstrap';
@@ -14,23 +15,7 @@ class Index extends Component {
           <CardTitle> Main Case Table </CardTitle>
         </div>
         <div className="bg-svdark">
-            <Table striped>
-              <thead>
-                <tr>
-                  <th className="table-mini">#</th>
-                  <th className="table-mini">RUN</th>
-                  <th className="table-Lmini">Status</th>
-                  <th>Test Name</th>
-                  <th>Time</th>
-                  <th>Last test</th>
-                  <th className="table-mini">log</th>
-                </tr>
-              </thead>
-              <tbody>
-                <TableInfo />
-                <TableInfo />
-              </tbody>
-            </Table>
+          <TableInfo nameFiles={this.props.getFiles.nameTest} />
         </div>
         <div className="card-footer small text-muted">Updated yesterday at 11:59 PM
         </div>
@@ -39,4 +24,11 @@ class Index extends Component {
   }
 }
 
-export default Index;
+const mapStatetoProp=(state)=>{ 
+  return {
+    runTestR: state.runTestR,
+    getFiles: state.getFiles
+  }
+}
+
+export default connect(mapStatetoProp) (Index);

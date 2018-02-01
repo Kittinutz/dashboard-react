@@ -7,7 +7,7 @@ class Inside extends Component {
     return (
       <div className="content-wrapper">
         <div className="container-fluid">    
-          <Index/>
+          <Index />
           <div className="row">
           </div>
         </div>
