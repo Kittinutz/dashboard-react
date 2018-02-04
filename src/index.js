@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 // import {startLaravelDuskTest} from './components/startLaravelDuskTest';
-import {socket} from './components/socketIO';
+// import {socket} from './components/socketIO';
 //topcss
 import './vendor/css/top.css';
 import './vendor/css/Inside.css';
@@ -49,12 +49,11 @@ const runTestReducer=(state=runTestState, action)=>{
 const getNameFilesTest=(state=dataTestCase, action)=>{
     switch(action.type){
         case "getAllFiles":
-            return state={
+            state={
                 ...state,
                 nameTest: action.payload
             }    
             break;
-
         default:
     }
     return state;

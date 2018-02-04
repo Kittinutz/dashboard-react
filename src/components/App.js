@@ -3,12 +3,12 @@ import {connect} from "react-redux";
 import {socket} from './socketIO';
 
 import Topbar from './topBar/Topbar';
-import Inside from './inside/Inside'
+import Inside from './inside/Inside';
 // for top css
 
 class App extends Component {
   constructor(props){
-    super(props),
+    super(props)
     this.state={
       nf: null,
       flagServe: true,
