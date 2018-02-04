@@ -35,12 +35,6 @@ const runTestReducer=(state=runTestState, action)=>{
                 nameTest: action.payload
             }
             break;
-        // case "upVar":
-        //     state={
-        //         run: true,
-        //         nameTest: [...state.nameTest],
-        //     }
-        //     break;
         case "runnig":
             state={
                 ...state,
@@ -53,13 +47,14 @@ const runTestReducer=(state=runTestState, action)=>{
 }
 
 const getNameFilesTest=(state=dataTestCase, action)=>{
-    console.log(action)
     switch(action.type){
         case "getAllFiles":
             return state={
+                ...state,
                 nameTest: action.payload
-            }
+            }    
             break;
+
         default:
     }
     return state;
@@ -76,10 +71,10 @@ store.subscribe(()=>{
     console.log(store.getState());
 });
 
-store.dispatch({
-    type:"getAllFiles",
-    payload: ["TC01loginTest", "TCXXTEST"]
-});
+// store.dispatch({
+//     type:"getAllFiles",
+//     payload: ["Loading"]
+// });
 
 ReactDOM.render(
     <Provider store={store}>

@@ -11,11 +11,11 @@ class Index extends Component {
   render() {
     
     return (
-      <Card className="mb-3 bg-dark sdow-box">
+      <Card className="mb-3 bg-dark sdow-box magin-center">
         <div className="card-header">
           <CardTitle> Main Case Table </CardTitle>
         </div>
-        <div className="bg-svdark">
+        <div className="bg-svdark overTable">
           <TableInfo nameFiles={this.props.getFiles.nameTest} />
           {/* <TableInfo/> */}
         </div>

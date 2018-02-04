@@ -3,9 +3,22 @@
     text-align: center;
 }
 
+.card{
+    max-width: 60em;
+}
+
 .table-Lmini{
     width: 5em;
     text-align: center;
+}
+
+.table-name{
+    width: 20em;
+}
+
+.table-time{
+    width: 10em;
+    min-width: 10em;
 }
 
 .btn-table{
@@ -15,4 +28,21 @@
 }
 .tbinfo-center{
     padding-top: 5000px;
+}
+
+.overTable{
+    overflow: auto;
+}
+
+.right{
+    float: right;
+    margin-bottom: 10px;
+}
+
+.center{
+    text-align: center;
+}
+
+.magin-center{
+    margin: auto;
 }

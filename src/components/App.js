@@ -8,33 +8,32 @@ import Inside from './inside/Inside'
 
 class App extends Component {
   constructor(props){
-    super(props)
-    this.state={nf: null,
-                shutup: true}
+    super(props),
+    this.state={
+      nf: null,
+      flagServe: true,
+      getFiles: ()=>{
+                  if(this.state.nf != null && this.state.flagServe ===true) {
+                    this.setState({ flagServe: false});
+                    // console.log(flagServe);
+                    this.props.getNameFile(this.state.nf);
+      } 
+      }
+    }
   }
-  
-  async componentDidMount(){
-    let { nf } = this.state;
-
-    await socket.on('getNameFiles', (nameFiles) => {
-      console.log(nameFiles);
-           this.setState({ nf: nameFiles.slice(0, nameFiles.length) });
+  //nf คือ nameFiles ใน const
+  componentDidMount(){
+    socket.on('getNameFiles', (nameFiles) => {
+        this.setState({ nf: [...nameFiles] });
       }
     )
 
+    setTimeout(()=>{
+      this.state.getFiles();
+    },500)
   }
 
-
   render() {
-    const { nf, shutup } = this.state;
-    console.log('Ta',nf);
-    console.log(shutup);
-    if(nf && shutup) {
-      this.setState({ shutup: false});
-      console.log('NF', nf);
-      this.props.getNameFile(nf);
-      // setTimeout(() =>{ this.setState({ shutup: true }) }, 35000);
-    }
     return (
       <div className="bg-vdark v-full tx-white">
         <Topbar />
@@ -64,4 +63,3 @@ const mapDispatchtoProp=(dispatch)=>{
 }
 
 export default connect(mapStatetoProp, mapDispatchtoProp) (App);
-// export default connect(mapStatetoProp) (App);

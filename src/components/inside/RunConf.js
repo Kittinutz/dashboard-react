@@ -33,15 +33,15 @@ class RunConf extends Component {
             {/* <Button color="danger" className="btn-table" onClick={this.runTest.bind(this)}>RUN</Button> */}
             <Button id={this.props.nameTest} color="danger" className="btn-table" onClick={this.toggle}>RUN</Button>
             <Popover target={this.props.nameTest} placement="bottom" isOpen={this.state.popoverOpen}  toggle={this.toggle}>
-                <PopoverHeader> {this.props.nameTest}</PopoverHeader>
+                <PopoverHeader> {this.props.nameTest} ?</PopoverHeader>
                 <PopoverBody>  
-                    <Button color="success" className="btn-table"  
-                      onClick={this.run1Test.bind(this)}
-                    > Yes</Button>
-
-                    <Button className="btn-table "
+                    <Button className="btn-table right"
                       onClick={this.toggle}
                     >No</Button>
+
+                    <Button color="success" className="btn-table right"  
+                      onClick={this.run1Test.bind(this)}
+                    > Yes</Button>
                 </PopoverBody>
             </Popover>
         </div>
