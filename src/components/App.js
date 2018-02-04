@@ -7,14 +7,34 @@ import Inside from './inside/Inside'
 // for top css
 
 class App extends Component {
-  componentDidMount(){
-    socket.on('getNameFiles', function(nameFiles){
-      nameFiles.map((nameFiles)=>
-        console.log(nameFiles)
-      )
-    });
+  constructor(props){
+    super(props)
+    this.state={nf: null,
+                shutup: true}
   }
+  
+  async componentDidMount(){
+    let { nf } = this.state;
+
+    await socket.on('getNameFiles', (nameFiles) => {
+      console.log(nameFiles);
+           this.setState({ nf: nameFiles.slice(0, nameFiles.length) });
+      }
+    )
+
+  }
+
+
   render() {
+    const { nf, shutup } = this.state;
+    console.log('Ta',nf);
+    console.log(shutup);
+    if(nf && shutup) {
+      this.setState({ shutup: false});
+      console.log('NF', nf);
+      this.props.getNameFile(nf);
+      // setTimeout(() =>{ this.setState({ shutup: true }) }, 35000);
+    }
     return (
       <div className="bg-vdark v-full tx-white">
         <Topbar />
@@ -36,8 +56,9 @@ const mapDispatchtoProp=(dispatch)=>{
     getNameFile:(nameFiles)=>{
       dispatch({
         type: "getAllFiles",
-        payload: nameFiles 
+        payload: nameFiles
       })
+      return nameFiles;
     }
   }
 }

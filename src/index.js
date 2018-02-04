@@ -23,7 +23,7 @@ const runTestState={
 }
 
 const dataTestCase={
-    nameTest : ""
+    nameTest : []
 }
 
 const runTestReducer=(state=runTestState, action)=>{
@@ -53,10 +53,11 @@ const runTestReducer=(state=runTestState, action)=>{
 }
 
 const getNameFilesTest=(state=dataTestCase, action)=>{
+    console.log(action)
     switch(action.type){
         case "getAllFiles":
-            state={
-                nameTest: [...action.payload]
+            return state={
+                nameTest: action.payload
             }
             break;
         default:
