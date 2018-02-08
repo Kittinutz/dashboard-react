@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {socket} from '../socketIO';
-import {connect} from "react-redux";
+// import {connect} from "react-redux";
 import { 
    Button, Popover, PopoverBody, PopoverHeader
  } from 'reactstrap';
 
  
-class RunConf extends Component {
+class RunTestConf extends Component {
   constructor(props) {
     super(props);
 
@@ -24,7 +24,7 @@ class RunConf extends Component {
   
   run1Test(){
     this.toggle();
-    socket.emit('runTest',"");
+    socket.emit('runTest', this.props.nameTest);
   }
 
   render() {
@@ -49,22 +49,22 @@ class RunConf extends Component {
   }
 }
 
-const mapDispatchtoProp=(dispatch)=>{ 
-  return {
-    getNameFile:(nameFiles)=>{
-      dispatch({
-        type: "getAllFiles",
-        payload: nameFiles 
-      })
-    },
-    startTest:(nameFiles)=>{
-      dispatch({
-        type:"",
-        payload: nameFiles
-      })
-    }
-  }
-}
+// const mapDispatchtoProp=(dispatch)=>{ 
+//   return {
+//     getNameFile:(nameFiles)=>{
+//       dispatch({
+//         type: "getAllFiles",
+//         payload: nameFiles 
+//       })
+//     },
+//     startTest:(nameFiles)=>{
+//       dispatch({
+//         type:"",
+//         payload: nameFiles
+//       })
+//     }
+//   }
+// }
 
-export default connect(mapDispatchtoProp) (RunConf);
-// export default RunConf;
+// export default connect(mapDispatchtoProp) (RunConf);
+export default RunTestConf;

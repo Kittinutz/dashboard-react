@@ -8,8 +8,9 @@ class Inside extends Component {
       <div className="content-wrapper">
         <div className="container-fluid">    
           <Index />
-          <div className="row">
-          </div>
+          
+        </div>
+        <div className="row">
         </div>
       </div>
     );

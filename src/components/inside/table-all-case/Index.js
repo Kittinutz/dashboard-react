@@ -9,7 +9,6 @@ import TableInfo from './TableInfo';
 class Index extends Component {
   
   render() {
-    
     return (
       <Card className="mb-3 bg-dark sdow-box magin-center">
         <div className="card-header">

@@ -17,7 +17,7 @@ class App extends Component {
                     this.setState({ flagServe: false});
                     // console.log(flagServe);
                     this.props.getNameFile(this.state.nf);
-      } 
+                   } 
       }
     }
   }
@@ -27,13 +27,12 @@ class App extends Component {
         this.setState({ nf: [...nameFiles] });
       }
     )
-
-    setTimeout(()=>{
-      this.state.getFiles();
-    },500)
   }
 
   render() {
+    setTimeout(()=>{
+      this.state.getFiles();
+    },100);
     return (
       <div className="bg-vdark v-full tx-white">
         <Topbar />
