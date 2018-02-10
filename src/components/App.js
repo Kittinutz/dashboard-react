@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import {connect} from "react-redux";
-
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+// connect server
 import {socket} from './SocketIO';
-
+// components
 import Topbar from './topBar/Topbar';
 import Inside from './inside/Inside';
-// for top css
+//action
+import {getNameFile} from '../actions/GetNameFilesAction';  
 
 class App extends Component {
   constructor(props){
@@ -13,7 +15,7 @@ class App extends Component {
     this.state={
       nf: null,
       flagServe: true,
-      getFiles: ()=>{
+      getNameFile: ()=>{
                   if(this.state.nf != null && this.state.flagServe ===true) {
                     this.setState({ flagServe: false});
                     // console.log(flagServe);
@@ -23,7 +25,7 @@ class App extends Component {
     }
   }
   componentDidMount(){
-    socket.on('getNameFiles', (nameFiles) => {
+    socket.on('SC_GETNAMETESTCASE', (nameFiles) => {
         this.setState({ nf: [...nameFiles] });
       }
     )
@@ -31,7 +33,7 @@ class App extends Component {
 
   render() {
     setTimeout(()=>{
-      this.state.getFiles();
+      this.state.getNameFile();
     },100);
     
     return (
@@ -43,22 +45,18 @@ class App extends Component {
   }
 }
 
-export const mapStatetoProps=(state)=>{ 
+function mapStatetoProps(state){ 
   return {
-    getFiles: state.getFiles
+    getFiles: state.getFiles,
+    runTest: state.runTest
   }
 }
 
-const mapDispatchtoProps=(dispatch)=>{ 
-  return {
-    getNameFile:(nameFiles)=>{
-      dispatch({
-        type: "GET_NAMETESTSCASE",
-        payload: nameFiles
-      })
-      return nameFiles;
-    }
-  }
+function mapDispatchtoProps(dispatch){ 
+  return bindActionCreators(
+    {
+      getNameFile:  getNameFile
+    }, dispatch)
 }
 
 export default connect(mapStatetoProps, mapDispatchtoProps) (App);

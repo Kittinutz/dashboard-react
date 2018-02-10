@@ -24,7 +24,7 @@ class Index extends Component {
   }
 }
 
-export const mapStatetoProps=(state)=>{ 
+function mapStatetoProps(state){ 
   return {
     getFiles: state.getFiles
   }

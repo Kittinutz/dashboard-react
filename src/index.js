@@ -18,7 +18,7 @@ import {createStore, combineReducers, applyMiddleware} from "redux";
 // const store=createStore(reducer, 1);
 
 // reducer
-import {getNameFilesTest} from './reducers/GetNameTestsCase';
+import {getNameFilesTest} from './reducers/GetNameFilesTest';
 import {runTestReducer} from './reducers/RuningTest';
 
 // Middleware
@@ -30,9 +30,9 @@ const logger=(store)=>(next)=>(action)=>{
 //multiple stores
 const store=createStore(combineReducers({runTest: runTestReducer, getFiles: getNameFilesTest}), {},applyMiddleware(logger));
 
-// store.subscribe(()=>{
-//     console.log(store.getState());
-// });
+store.subscribe(()=>{
+    console.log(store.getState());
+});
 
 // store.dispatch({
 //     type:"getAllFiles",
