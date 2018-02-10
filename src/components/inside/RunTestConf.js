@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import {socket} from '../socketIO';
+import {socket} from '../SocketIO';
 // import {connect} from "react-redux";
 import { 
    Button, Popover, PopoverBody, PopoverHeader
  } from 'reactstrap';
-
  
 class RunTestConf extends Component {
   constructor(props) {
@@ -50,23 +49,6 @@ class RunTestConf extends Component {
     );
   }
 }
-
-// const mapDispatchtoProp=(dispatch)=>{ 
-//   return {
-//     getNameFile:(nameFiles)=>{
-//       dispatch({
-//         type: "getAllFiles",
-//         payload: nameFiles 
-//       })
-//     },
-//     startTest:(nameFiles)=>{
-//       dispatch({
-//         type:"",
-//         payload: nameFiles
-//       })
-//     }
-//   }
-// }
 
 // export default connect(mapDispatchtoProp) (RunConf);
 export default RunTestConf;

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import {socket} from '../socketIO';
+import {socket} from '../SocketIO';
 // import {connect} from "react-redux";
 import { 
    Button, Popover, PopoverBody, PopoverHeader
  } from 'reactstrap';
 
- 
 class ReadFileConf extends Component {
   constructor(props) {
     super(props);

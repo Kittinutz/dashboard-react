@@ -24,11 +24,10 @@ class Index extends Component {
   }
 }
 
-const mapStatetoProp=(state)=>{ 
+export const mapStatetoProps=(state)=>{ 
   return {
-    runTestR: state.runTestR,
     getFiles: state.getFiles
   }
 }
 
-export default connect(mapStatetoProp) (Index);
+export default connect(mapStatetoProps) (Index);

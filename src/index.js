@@ -28,7 +28,7 @@ const logger=(store)=>(next)=>(action)=>{
 }
 
 //multiple stores
-const store=createStore(combineReducers({runTestR: runTestReducer, getFiles: getNameFilesTest}), {},applyMiddleware(logger));
+const store=createStore(combineReducers({runTest: runTestReducer, getFiles: getNameFilesTest}), {},applyMiddleware(logger));
 
 // store.subscribe(()=>{
 //     console.log(store.getState());

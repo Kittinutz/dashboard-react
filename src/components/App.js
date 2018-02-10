@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
-import {socket} from './socketIO';
+
+import {socket} from './SocketIO';
 
 import Topbar from './topBar/Topbar';
 import Inside from './inside/Inside';
@@ -21,7 +22,6 @@ class App extends Component {
       }
     }
   }
-  //nf คือ nameFiles ใน const
   componentDidMount(){
     socket.on('getNameFiles', (nameFiles) => {
         this.setState({ nf: [...nameFiles] });
@@ -43,14 +43,13 @@ class App extends Component {
   }
 }
 
-const mapStatetoProp=(state)=>{ 
+export const mapStatetoProps=(state)=>{ 
   return {
-    runTestR: state.runTestR,
     getFiles: state.getFiles
   }
 }
 
-const mapDispatchtoProp=(dispatch)=>{ 
+const mapDispatchtoProps=(dispatch)=>{ 
   return {
     getNameFile:(nameFiles)=>{
       dispatch({
@@ -62,4 +61,4 @@ const mapDispatchtoProp=(dispatch)=>{
   }
 }
 
-export default connect(mapStatetoProp, mapDispatchtoProp) (App);
+export default connect(mapStatetoProps, mapDispatchtoProps) (App);
