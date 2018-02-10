@@ -1,20 +1,39 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
-import {socket} from './socketIO';
+
+import {socket} from './SocketIO';
 
 import Topbar from './topBar/Topbar';
-import Inside from './inside/Inside'
+import Inside from './inside/Inside';
 // for top css
 
 class App extends Component {
-  componentDidMount(){
-    socket.on('getNameFiles', function(nameFiles){
-      nameFiles.map((nameFiles)=>
-        console.log(nameFiles)
-      )
-    });
+  constructor(props){
+    super(props)
+    this.state={
+      nf: null,
+      flagServe: true,
+      getFiles: ()=>{
+                  if(this.state.nf != null && this.state.flagServe ===true) {
+                    this.setState({ flagServe: false});
+                    // console.log(flagServe);
+                    this.props.getNameFile(this.state.nf);
+                   } 
+      }
+    }
   }
+  componentDidMount(){
+    socket.on('getNameFiles', (nameFiles) => {
+        this.setState({ nf: [...nameFiles] });
+      }
+    )
+  }
+
   render() {
+    setTimeout(()=>{
+      this.state.getFiles();
+    },100);
+    
     return (
       <div className="bg-vdark v-full tx-white">
         <Topbar />
@@ -24,23 +43,22 @@ class App extends Component {
   }
 }
 
-const mapStatetoProp=(state)=>{ 
+export const mapStatetoProps=(state)=>{ 
   return {
-    runTestR: state.runTestR,
     getFiles: state.getFiles
   }
 }
 
-const mapDispatchtoProp=(dispatch)=>{ 
+const mapDispatchtoProps=(dispatch)=>{ 
   return {
     getNameFile:(nameFiles)=>{
       dispatch({
-        type: "getAllFiles",
-        payload: nameFiles 
+        type: "GET_NAMETESTSCASE",
+        payload: nameFiles
       })
+      return nameFiles;
     }
   }
 }
 
-export default connect(mapStatetoProp, mapDispatchtoProp) (App);
-// export default connect(mapStatetoProp) (App);
+export default connect(mapStatetoProps, mapDispatchtoProps) (App);

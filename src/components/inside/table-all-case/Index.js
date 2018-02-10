@@ -7,16 +7,15 @@ import {
 import TableInfo from './TableInfo'; 
 
 class Index extends Component {
-
+  
   render() {
     return (
-      <Card className="mb-3 bg-dark sdow-box">
+      <Card className="mb-3 bg-dark sdow-box magin-center">
         <div className="card-header">
           <CardTitle> Main Case Table </CardTitle>
         </div>
-        <div className="bg-svdark">
+        <div className="bg-svdark overTable">
           <TableInfo nameFiles={this.props.getFiles.nameTest} />
-          {/* <TableInfo/> */}
         </div>
         <div className="card-footer small text-muted">Updated yesterday at 11:59 PM
         </div>
@@ -25,11 +24,10 @@ class Index extends Component {
   }
 }
 
-const mapStatetoProp=(state)=>{ 
+export const mapStatetoProps=(state)=>{ 
   return {
-    runTestR: state.runTestR,
     getFiles: state.getFiles
   }
 }
 
-export default connect(mapStatetoProp) (Index);
+export default connect(mapStatetoProps) (Index);
