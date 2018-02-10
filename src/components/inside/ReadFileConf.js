@@ -12,23 +12,24 @@ class ReadFileConf extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       popoverOpen: false,
-      data: 'No!',
+      data: 'Loading...',
       intervalID: null
     };
   }
   
   toggle() {
     this.setState({
-      popoverOpen: !this.state.popoverOpen
+      popoverOpen: !this.state.popoverOpen,
+      data: 'Loading...'
     });
-    if(this.state.data === 'No!'){
       socket.emit('read-logfiles', this.props.namelog);
       socket.on('client-read', (logData)=>{
-        this.setState({
-          data: logData
-        });
+        setTimeout(()=>{
+          this.setState({
+            data: logData
+          });
+        }, 250)
       });
-    }
   }
 
   render() {

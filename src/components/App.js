@@ -33,6 +33,7 @@ class App extends Component {
     setTimeout(()=>{
       this.state.getFiles();
     },100);
+    
     return (
       <div className="bg-vdark v-full tx-white">
         <Topbar />
@@ -53,7 +54,7 @@ const mapDispatchtoProp=(dispatch)=>{
   return {
     getNameFile:(nameFiles)=>{
       dispatch({
-        type: "getAllFiles",
+        type: "GET_NAMETESTSCASE",
         payload: nameFiles
       })
       return nameFiles;

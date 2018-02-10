@@ -12,63 +12,27 @@ import './vendor/bootstrap4/css/bootstrap.css';
 import registerServiceWorker from './registerServiceWorker';
 
 //set redux
-import {Provider}from "react-redux";
+import {Provider} from 'react-redux';
 import {createStore, combineReducers, applyMiddleware} from "redux"; 
 //state ที่สนใจ,  action state เราอยู่ไหน
 // const store=createStore(reducer, 1);
-const runTestState={
-    run : false,
-    nameTest : "",
-    runningState : false
-}
 
-const dataTestCase={
-    nameTest : []
-}
+// reducer
+import {getNameFilesTest} from './reducers/GetNameTestsCase';
+import {runTestReducer} from './reducers/RuningTest';
 
-const runTestReducer=(state=runTestState, action)=>{
-    switch (action.type){
-        case "run":
-            state={
-                ...state,
-                run: true,
-                nameTest: action.payload
-            }
-            break;
-        case "runnig":
-            state={
-                ...state,
-                runningState : action.payload
-            }
-            break;
-        default:
-    }
-    return state;
-}
-
-const getNameFilesTest=(state=dataTestCase, action)=>{
-    switch(action.type){
-        case "getAllFiles":
-            state={
-                ...state,
-                nameTest: action.payload
-            }    
-            break;
-        default:
-    }
-    return state;
-}
 // Middleware
 const logger=(store)=>(next)=>(action)=>{
     console.log("Log Action", action);
     next(action);
 }
+
 //multiple stores
 const store=createStore(combineReducers({runTestR: runTestReducer, getFiles: getNameFilesTest}), {},applyMiddleware(logger));
 
-store.subscribe(()=>{
-    console.log(store.getState());
-});
+// store.subscribe(()=>{
+//     console.log(store.getState());
+// });
 
 // store.dispatch({
 //     type:"getAllFiles",

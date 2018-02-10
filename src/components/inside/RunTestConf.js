@@ -9,7 +9,6 @@ import {
 class RunTestConf extends Component {
   constructor(props) {
     super(props);
-
     this.toggle = this.toggle.bind(this);
     this.state = {
       popoverOpen: false
@@ -25,6 +24,9 @@ class RunTestConf extends Component {
   run1Test(){
     this.toggle();
     socket.emit('runTest', this.props.nameTest);
+    socket.on('status_test', (status)=>{
+
+    })
   }
 
   render() {
