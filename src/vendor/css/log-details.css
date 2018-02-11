@@ -1,0 +1,11 @@
+.read-logfile{
+    white-space: pre-line;
+    font-size: 10pt;
+    color: whitesmoke;
+    background-color: black;
+    /* background-color: rgb(red) !important; */
+}
+
+.bar-log{
+    color:white;
+}

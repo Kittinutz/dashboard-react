@@ -23,7 +23,7 @@ class TableInfo extends Component {
           {/* <td><Button color="info" className="btn-table">info</Button></td> */}
         </tr>
       )
-    })
+    });
     
     return (
       <Table striped >

@@ -23,6 +23,33 @@ class RunTestConf extends Component {
     };
   }
 
+  render() {
+    return (
+        <div>  
+          <Button id={this.props.nameTest} color="danger" className="btn-table" onClick={this.selectPop.bind(this)}> RUN </Button>
+          <Popover target={this.props.nameTest} placement="bottom" isOpen={this.state.popoverOpenT}  toggle={this.toggleT}>
+            <PopoverHeader> {this.props.nameTest} ?</PopoverHeader>
+            <PopoverBody>  
+                <Button className="btn-table right"
+                  onClick={this.toggleT}
+                >No</Button>
+
+                <Button color="success" className="btn-table right"  
+                  onClick={this.run1Test.bind(this)}
+                > Yes</Button>
+            </PopoverBody>
+          </Popover>
+
+          <Popover target={this.props.nameTest} placement="bottom" isOpen={this.state.popoverOpenF}  toggle={this.toggleF}>
+            <PopoverHeader> STOP!</PopoverHeader>
+            <PopoverBody>  
+              System working with {this.state.nameTest}.
+            </PopoverBody>
+          </Popover>
+        </div>
+    );
+  }
+
   toggleT() {
     this.setState({
       popoverOpenT: !this.state.popoverOpenT
@@ -72,32 +99,6 @@ class RunTestConf extends Component {
     }
   }
 
-  render() {
-    return (
-        <div>  
-          <Button id={this.props.nameTest} color="danger" className="btn-table" onClick={this.selectPop.bind(this)}> RUN </Button>
-          <Popover target={this.props.nameTest} placement="bottom" isOpen={this.state.popoverOpenT}  toggle={this.toggleT}>
-            <PopoverHeader> {this.props.nameTest} ?</PopoverHeader>
-            <PopoverBody>  
-                <Button className="btn-table right"
-                  onClick={this.toggleT}
-                >No</Button>
-
-                <Button color="success" className="btn-table right"  
-                  onClick={this.run1Test.bind(this)}
-                > Yes</Button>
-            </PopoverBody>
-          </Popover>
-
-          <Popover target={this.props.nameTest} placement="bottom" isOpen={this.state.popoverOpenF}  toggle={this.toggleF}>
-            <PopoverHeader> STOP!</PopoverHeader>
-            <PopoverBody>  
-              System working with {this.state.nameTest}.
-            </PopoverBody>
-          </Popover>
-        </div>
-    );
-  }
 }
 
 function mapStatetoProps(state){ 
@@ -115,4 +116,3 @@ function mapDispatchtoProps(dispatch){
 }
 
 export default connect(mapStatetoProps, mapDispatchtoProps) (RunTestConf);
-// export default RunTestConf;

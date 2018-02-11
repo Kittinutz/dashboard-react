@@ -5,6 +5,7 @@ import App from './components/App';
 // import {socket} from './components/socketIO';
 //topcss
 import './vendor/css/top.css';
+import './vendor/css/log-details.css';
 import './vendor/css/Inside.css';
 import './vendor/css/sb-admin.css';
 // for second css

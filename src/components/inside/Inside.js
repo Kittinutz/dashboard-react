@@ -10,8 +10,8 @@ class Inside extends Component {
           <Index />
           
         </div>
-        <div className="row">
-        </div>
+        {/* <div className="row">
+        </div> */}
       </div>
     );
   }
