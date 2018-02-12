@@ -17,7 +17,11 @@ class TableInfo extends Component {
   render() {
     const nameTest = this.props.nameFiles.map((nameFiles,i) =>{
       if( typeof this.props.backup.lastTest[i] === 'undefined'){
-        this.props.backup.lastTest[i] = 'no time.';
+        this.props.backup.lastTest[i] = '-';
+        // console.log(this.props.getInfo.timeTest[i]);
+      }
+      if( typeof this.props.backup.timeTest[i] === 'undefined'){
+        this.props.backup.timeTest[i] = '-';
         // console.log(this.props.getInfo.timeTest[i]);
       }
       return (
@@ -26,7 +30,7 @@ class TableInfo extends Component {
           <td><RunTestConf nameTest ={nameFiles} keys={'TC'+ (i+1)}/></td>
           <td className="center">Fails</td>
           <td>{nameFiles}</td>
-          <td></td>
+          <td>{this.props.backup.timeTest[i]}</td>
           <td>{this.props.backup.lastTest[i]}</td>
           <td><ReadFileConf namelog={nameFiles} keys={i}/></td>
         </tr>
