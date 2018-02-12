@@ -7,7 +7,7 @@ import {socket} from './SocketIO';
 import Topbar from './topBar/Topbar';
 import Inside from './inside/Inside';
 //action
-import {getNameFile} from '../actions/GetNameFilesAction';  
+import {GetInfoTestsAction} from '../actions/GetInfoTestsAction';  
 
 class App extends Component {
   constructor(props){
@@ -15,11 +15,11 @@ class App extends Component {
     this.state={
       nf: null,
       flagServe: true,
-      getNameFile: ()=>{
+      GetInfoTestsAction: ()=>{
                   if(this.state.nf != null && this.state.flagServe ===true) {
                     this.setState({ flagServe: false});
                     // console.log(flagServe);
-                    this.props.getNameFile(this.state.nf);
+                    this.props.GetInfoTestsAction(this.state.nf);
                    } 
       }
     }
@@ -33,7 +33,7 @@ class App extends Component {
 
   render() {
     setTimeout(()=>{
-      this.state.getNameFile();
+      this.state.GetInfoTestsAction();
     },100);
     
     return (
@@ -47,7 +47,6 @@ class App extends Component {
 
 function mapStatetoProps(state){ 
   return {
-    getFiles: state.getFiles,
     runTest: state.runTest
   }
 }
@@ -55,7 +54,7 @@ function mapStatetoProps(state){
 function mapDispatchtoProps(dispatch){ 
   return bindActionCreators(
     {
-      getNameFile:  getNameFile
+      GetInfoTestsAction:  GetInfoTestsAction
     }, dispatch)
 }
 

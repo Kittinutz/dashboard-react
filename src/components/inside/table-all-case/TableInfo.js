@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-// import {connect} from 'react-redux';
-// import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import { 
    Table
  } from 'reactstrap';
@@ -8,19 +8,27 @@ import {
 import RunTestConf from '../RunTestConf';
 import ReadFileConf from '../ReadFileConf';
 class TableInfo extends Component {
-  
+  // constructor(props) {
+  //   super(props);
+  //   this.state = { 
+  //     timeTest : this.props.getInfo.timeTest
+  //   };
+  // }  
   render() {
     const nameTest = this.props.nameFiles.map((nameFiles,i) =>{
+      if( typeof this.props.getInfo.timeTest[i] === 'undefined'){
+        this.props.getInfo.timeTest[i] = 'no time.';
+        // console.log(this.props.getInfo.timeTest[i]);
+      }
       return (
         <tr key={i}>
           <th scope="row" className="center">{i+1}</th>
-          <td><RunTestConf nameTest ={nameFiles}/></td>
+          <td><RunTestConf nameTest ={nameFiles} keys={'TC'+ (i+1)}/></td>
           <td className="center">Fails</td>
           <td>{nameFiles}</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td><ReadFileConf namelog={nameFiles}/></td>
-          {/* <td><Button color="info" className="btn-table">info</Button></td> */}
+          <td></td>
+          <td>{this.props.getInfo.timeTest[i]}</td>
+          <td><ReadFileConf namelog={nameFiles} keys={i}/></td>
         </tr>
       )
     });
@@ -45,5 +53,17 @@ class TableInfo extends Component {
     );
   }
 }
+function mapStatetoProps(state){ 
+  return {
+    runTest: state.runTest,
+    getInfo: state.getInfo
+  }
+}
 
-export default  TableInfo;
+function mapDispatchtoProps(dispatch){ 
+  return bindActionCreators(
+    {
+    }, dispatch)
+}
+
+export default connect(mapStatetoProps, mapDispatchtoProps) (TableInfo);

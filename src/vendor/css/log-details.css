@@ -1,11 +1,49 @@
 .read-logfile{
-    white-space: pre;
+    white-space: pre-line;
     font-size: 10pt;
-    color: whitesmoke;
-    background-color: black;
-    /* background-color: rgb(red) !important; */
+    color: white;
+    background-color: rgb(16, 43, 49);
+    overflow: auto;
+    max-height: 80vh;
+    padding: 10px 20px;
 }
 
 .bar-log{
     color:white;
 }
+
+.read-set-layout{
+    max-width: 100%;
+}
+
+/* .read-logfile{
+    white-space: pre-line;
+    font-size: 10pt;
+    color: whitesmoke;
+    background-color: black;
+}
+
+.bar-log{
+    color:white;
+}
+
+.read-logsize{
+    max-width: 950px;
+}
+
+.read-set-layout{
+    min-height: calc(100vh);
+    padding-top: 7em;
+    width: 100%;
+    margin: auto;
+}
+
+@media (min-width : 990px) {
+    .read-log-body {
+      max-height: 400px;
+    }
+    .read-set-layout{
+        padding-left:  200px;
+    }
+} */
+

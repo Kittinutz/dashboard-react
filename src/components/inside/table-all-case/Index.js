@@ -15,7 +15,7 @@ class Index extends Component {
           <CardTitle> Main Case Table </CardTitle>
         </div>
         <div className="bg-svdark overTable">
-          <TableInfo nameFiles={this.props.getFiles.nameTest} />
+          <TableInfo nameFiles={this.props.getInfo.nameTest} />
         </div>
         <div className="card-footer small text-muted">Updated yesterday at 11:59 PM
         </div>
@@ -26,7 +26,7 @@ class Index extends Component {
 
 function mapStatetoProps(state){ 
   return {
-    getFiles: state.getFiles
+    getInfo: state.getInfo
   }
 }
 

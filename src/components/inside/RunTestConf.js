@@ -9,6 +9,7 @@ import {
  
 //actions
 import {setRunTest, stopTest} from '../../actions/TesterAction';
+import {setTimeTest} from '../../actions/GetInfoTestsAction';
 class RunTestConf extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +28,7 @@ class RunTestConf extends Component {
     return (
         <div>  
           <Button id={this.props.nameTest} color="danger" className="btn-table" onClick={this.selectPop.bind(this)}> RUN </Button>
-          <Popover target={this.props.nameTest} placement="bottom" isOpen={this.state.popoverOpenT}  toggle={this.toggleT}>
+          <Popover className="popover-in-table" target={this.props.nameTest} placement="bottom" isOpen={this.state.popoverOpenT}  toggle={this.toggleT}>
             <PopoverHeader> {this.props.nameTest} ?</PopoverHeader>
             <PopoverBody>  
                 <Button className="btn-table right"
@@ -72,14 +73,18 @@ class RunTestConf extends Component {
   }
 
   run1Test(){
+    var date = new Date();
+    var time = date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()+'-'+date.getDate()+'/'+date.getMonth()+'/'+date.getFullYear();
     this.setState({
       running: true,
       nameTest: this.props.nameTest
-    });
-    this.props.setRunTest(this.props.nameTest);
 
+    });
+    // upload to store
+    this.props.setRunTest(this.props.nameTest);
+    this.props.setTimeTest(time, this.props.keys);
     this.toggleT();
-    socket.emit('SC_RUNTEST', this.props.nameTest);
+    socket.emit('SC_RUN_LaravelDusk', (this.props.nameTest));
     socket.on('SC_STATUS_TEST', (status)=>{
       this.props.stopTest(this.props.nameTest);
       this.setState({
@@ -89,7 +94,7 @@ class RunTestConf extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-      if(prevProps.runTest !== this.props.runTest){
+    if(prevProps.runTest !== this.props.runTest){
       this.setState({
         running: this.props.runTest.running,
         nameTest: this.props.runTest.nameTest,
@@ -104,6 +109,7 @@ class RunTestConf extends Component {
 function mapStatetoProps(state){ 
   return {
     runTest: state.runTest,
+    getInfo: state.getInfo
   }
 }
 
@@ -111,7 +117,8 @@ function mapDispatchtoProps(dispatch){
   return bindActionCreators(
     {
       setRunTest: setRunTest,
-      stopTest: stopTest
+      stopTest: stopTest,
+      setTimeTest: setTimeTest
     }, dispatch)
 }
 

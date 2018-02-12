@@ -19,7 +19,7 @@ class ReadFileConf extends Component {
     return (
         <div>
         <Button color="info" className="btn-table" onClick={this.toggle}>info</Button>
-        <Modal isOpen={this.state.modal} modalTransition={{ timeout: 5 }} backdropTransition={{ timeout: 10 }}
+        <Modal className="read-set-layout" isOpen={this.state.modal} modalTransition={{ timeout: 5 }} backdropTransition={{ timeout: 10 }}
           toggle={this.toggle} >
           <ModalHeader className="bar-log bg-svdark" toggle={this.toggle}> {this.props.namelog}.log </ModalHeader>
           <ModalBody className="read-logfile">

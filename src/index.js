@@ -4,12 +4,13 @@ import App from './components/App';
 // import {startLaravelDuskTest} from './components/startLaravelDuskTest';
 // import {socket} from './components/socketIO';
 //topcss
-import './vendor/css/top.css';
-import './vendor/css/log-details.css';
-import './vendor/css/Inside.css';
+import './vendor/bootstrap4/css/bootstrap.css';
 import './vendor/css/sb-admin.css';
 // for second css
-import './vendor/bootstrap4/css/bootstrap.css';
+import './vendor/css/top.css';
+import './vendor/css/Inside.css';
+import './vendor/css/log-details.css';
+
 import registerServiceWorker from './registerServiceWorker';
 
 //set redux
@@ -19,7 +20,7 @@ import {createStore, combineReducers, applyMiddleware} from "redux";
 // const store=createStore(reducer, 1);
 
 // reducer
-import {getNameFilesTest} from './reducers/GetNameFilesTest';
+import {GetInfoTests} from './reducers/GetInfoTests';
 import {runTestReducer} from './reducers/RuningTest';
 
 // Middleware
@@ -29,7 +30,7 @@ const logger=(store)=>(next)=>(action)=>{
 }
 
 //multiple stores
-const store=createStore(combineReducers({runTest: runTestReducer, getFiles: getNameFilesTest}), {},applyMiddleware(logger));
+const store=createStore(combineReducers({runTest: runTestReducer, getInfo: GetInfoTests}), {},applyMiddleware(logger));
 
 store.subscribe(()=>{
     console.log(store.getState());
