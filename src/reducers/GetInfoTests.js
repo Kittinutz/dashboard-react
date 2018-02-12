@@ -1,7 +1,6 @@
 //store
 const storeTestsCase={
-    nameTest : [],
-    timeTest : []
+    nameTest : []
 }
 
 export const GetInfoTests=(state=storeTestsCase, action)=>{
@@ -11,9 +10,6 @@ export const GetInfoTests=(state=storeTestsCase, action)=>{
                 ...state,
                 nameTest: action.payload
             }
-            break;
-        case "SET_TIMETESTCASE":
-                state.timeTest[(action.payloadID.slice(2)-1)] =  action.payloadTime;
             break;
         default:
     }

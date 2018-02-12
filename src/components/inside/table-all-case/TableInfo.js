@@ -16,8 +16,8 @@ class TableInfo extends Component {
   // }  
   render() {
     const nameTest = this.props.nameFiles.map((nameFiles,i) =>{
-      if( typeof this.props.getInfo.timeTest[i] === 'undefined'){
-        this.props.getInfo.timeTest[i] = 'no time.';
+      if( typeof this.props.backup.lastTest[i] === 'undefined'){
+        this.props.backup.lastTest[i] = 'no time.';
         // console.log(this.props.getInfo.timeTest[i]);
       }
       return (
@@ -27,7 +27,7 @@ class TableInfo extends Component {
           <td className="center">Fails</td>
           <td>{nameFiles}</td>
           <td></td>
-          <td>{this.props.getInfo.timeTest[i]}</td>
+          <td>{this.props.backup.lastTest[i]}</td>
           <td><ReadFileConf namelog={nameFiles} keys={i}/></td>
         </tr>
       )
@@ -55,8 +55,8 @@ class TableInfo extends Component {
 }
 function mapStatetoProps(state){ 
   return {
-    runTest: state.runTest,
-    getInfo: state.getInfo
+    ...state,
+    backup: state.backup
   }
 }
 

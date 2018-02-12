@@ -22,6 +22,7 @@ import {createStore, combineReducers, applyMiddleware} from "redux";
 // reducer
 import {GetInfoTests} from './reducers/GetInfoTests';
 import {runTestReducer} from './reducers/RuningTest';
+import {BackupStore} from './reducers/BackupStore';
 
 // Middleware
 const logger=(store)=>(next)=>(action)=>{
@@ -30,7 +31,11 @@ const logger=(store)=>(next)=>(action)=>{
 }
 
 //multiple stores
-const store=createStore(combineReducers({runTest: runTestReducer, getInfo: GetInfoTests}), {},applyMiddleware(logger));
+const store=createStore(combineReducers({
+    runTest: runTestReducer, 
+    getInfo: GetInfoTests,
+    backup : BackupStore
+ }), {},applyMiddleware(logger));
 
 store.subscribe(()=>{
     console.log(store.getState());

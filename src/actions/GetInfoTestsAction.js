@@ -4,11 +4,3 @@ export function GetInfoTestsAction(nameFile) {
         payload: nameFile
     }
 }
-
-export function setTimeTest(timeTest, ID){
-    return {
-        type: "SET_TIMETESTCASE",
-        payloadTime: timeTest,
-        payloadID: ID
-    }
-}

@@ -8,8 +8,8 @@ import {
  } from 'reactstrap';
  
 //actions
-import {setRunTest, stopTest} from '../../actions/TesterAction';
-import {setTimeTest} from '../../actions/GetInfoTestsAction';
+import {setRunTest, stopTest, setTimeLastTest} from '../../actions/TesterAction';
+
 class RunTestConf extends Component {
   constructor(props) {
     super(props);
@@ -82,7 +82,7 @@ class RunTestConf extends Component {
     });
     // upload to store
     this.props.setRunTest(this.props.nameTest);
-    this.props.setTimeTest(time, this.props.keys);
+    this.props.setTimeLastTest(time, this.props.keys);
     this.toggleT();
     socket.emit('SC_RUN_LaravelDusk', (this.props.nameTest));
     socket.on('SC_STATUS_TEST', (status)=>{
@@ -108,8 +108,8 @@ class RunTestConf extends Component {
 
 function mapStatetoProps(state){ 
   return {
-    runTest: state.runTest,
-    getInfo: state.getInfo
+    ...state,
+    runTest: state.runTest
   }
 }
 
@@ -118,7 +118,7 @@ function mapDispatchtoProps(dispatch){
     {
       setRunTest: setRunTest,
       stopTest: stopTest,
-      setTimeTest: setTimeTest
+      setTimeLastTest: setTimeLastTest
     }, dispatch)
 }
 

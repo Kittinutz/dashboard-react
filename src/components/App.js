@@ -47,7 +47,9 @@ class App extends Component {
 
 function mapStatetoProps(state){ 
   return {
-    runTest: state.runTest
+    ...state,
+    runTest: state.runTest,
+    backup: state.backup
   }
 }
 

@@ -11,3 +11,11 @@ export function stopTest(nameFile){
         payload: nameFile
     }
 }
+
+export function setTimeLastTest(timeTest, ID){
+    return {
+        type: "SET_LASTTEST",
+        payloadTime: timeTest,
+        payloadID: ID
+    }
+}

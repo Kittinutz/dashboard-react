@@ -26,6 +26,7 @@ class Index extends Component {
 
 function mapStatetoProps(state){ 
   return {
+    ...state,
     getInfo: state.getInfo
   }
 }
