@@ -10,12 +10,21 @@ const infomations={
 
 export const BackupStore=(state=infomations, action)=>{
     switch(action.type){
-        case "SET_LASTTEST":
-            state.timeLastTest[(action.payloadID.slice(2)-1)] =  action.payloadTime;
+        case "GET_SAVE":
+            state.timeLastTest = action.payloadTLT;
+            state.timeTest = action.payloadTT;
             break;
+
+        case "SET_LASTTEST":
+            state.timeLastTest[action.payloadID] =  action.payloadTime;
+            break;
+        
         case "GET_SAVETIMELASTTEST":
             state.timeLastTest = action.payload;
-            // console.log(action.payload);
+            break;
+
+        case "GET_SAVETIMETEST":
+            state.timeTest[action.keys] =  action.payload;
             break;
         default:
     }

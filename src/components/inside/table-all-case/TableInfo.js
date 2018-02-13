@@ -8,20 +8,21 @@ import {
 import RunTestConf from '../RunTestConf';
 import ReadFileConf from '../ReadFileConf';
 class TableInfo extends Component {
+
   render() {
     const nameTest = this.props.nameFiles.map((nameFiles,i) =>{
-      if( typeof this.props.backup.timeLastTest[i] === 'undefined'){
+      if( typeof this.props.backup.timeLastTest[i] === 'undefined' || this.props.backup.timeLastTest[i].length === 0 ){
         this.props.backup.timeLastTest[i] = '-';
         // console.log(this.props.getInfo.timeTest[i]);
       }
-      if( typeof this.props.backup.timeTest[i] === 'undefined'){
+      if( typeof this.props.backup.timeTest[i] === 'undefined' || this.props.backup.timeTest[i].length === 0 ){
         this.props.backup.timeTest[i] = '-';
         // console.log(this.props.getInfo.timeTest[i]);
       }
       return (
         <tr key={i}>
           <th scope="row" className="center">{i+1}</th>
-          <td><RunTestConf nameTest ={nameFiles} keys={'TC'+ (i+1)}/></td>
+          <td><RunTestConf nameTest ={nameFiles} keys={i}/></td>
           <td className="center">Fails</td>
           <td>{nameFiles}</td>
           <td>{this.props.backup.timeTest[i]}</td>

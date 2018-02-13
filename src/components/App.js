@@ -8,7 +8,7 @@ import Topbar from './topBar/Topbar';
 import Inside from './inside/Inside';
 //action
 import {getInfoTestsAction} from '../actions/GetInfoTestsAction';  
-import {getTimeLastTest} from '../actions/GetSaveData';
+import {getSaveData} from '../actions/GetSaveData';
 
 class App extends Component {
   constructor(props){
@@ -30,11 +30,11 @@ class App extends Component {
     socket.on('SC_GETNAMETESTCASE', (nameFiles) => {
         this.setState({ nf: [...nameFiles] });
       }
-    )
+    );
     // get save data.
-    socket.on('SC_SAVEDATA',(savedata_TLT)=>{
-      this.props.getTimeLastTest(savedata_TLT);
-    })
+    socket.on('SC_SAVEDATA', (data)=>{
+      this.props.getSaveData(data.saveTLT, data.saveTT);
+    });
   }
 
   render() {
@@ -63,7 +63,7 @@ function mapDispatchtoProps(dispatch){
   return bindActionCreators(
     {
       getInfoTestsAction:  getInfoTestsAction,
-      getTimeLastTest: getTimeLastTest
+      getSaveData: getSaveData
     }, dispatch)
 }
 
