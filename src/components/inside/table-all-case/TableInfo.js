@@ -8,16 +8,10 @@ import {
 import RunTestConf from '../RunTestConf';
 import ReadFileConf from '../ReadFileConf';
 class TableInfo extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { 
-  //     timeTest : this.props.getInfo.timeTest
-  //   };
-  // }  
   render() {
     const nameTest = this.props.nameFiles.map((nameFiles,i) =>{
-      if( typeof this.props.backup.lastTest[i] === 'undefined'){
-        this.props.backup.lastTest[i] = '-';
+      if( typeof this.props.backup.timeLastTest[i] === 'undefined'){
+        this.props.backup.timeLastTest[i] = '-';
         // console.log(this.props.getInfo.timeTest[i]);
       }
       if( typeof this.props.backup.timeTest[i] === 'undefined'){
@@ -31,7 +25,7 @@ class TableInfo extends Component {
           <td className="center">Fails</td>
           <td>{nameFiles}</td>
           <td>{this.props.backup.timeTest[i]}</td>
-          <td>{this.props.backup.lastTest[i]}</td>
+          <td>{this.props.backup.timeLastTest[i]}</td>
           <td><ReadFileConf namelog={nameFiles} keys={i}/></td>
         </tr>
       )

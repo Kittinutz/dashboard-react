@@ -7,7 +7,8 @@ import {socket} from './SocketIO';
 import Topbar from './topBar/Topbar';
 import Inside from './inside/Inside';
 //action
-import {GetInfoTestsAction} from '../actions/GetInfoTestsAction';  
+import {getInfoTestsAction} from '../actions/GetInfoTestsAction';  
+import {getTimeLastTest} from '../actions/GetSaveData';
 
 class App extends Component {
   constructor(props){
@@ -15,25 +16,30 @@ class App extends Component {
     this.state={
       nf: null,
       flagServe: true,
-      GetInfoTestsAction: ()=>{
-                  if(this.state.nf != null && this.state.flagServe ===true) {
-                    this.setState({ flagServe: false});
-                    // console.log(flagServe);
-                    this.props.GetInfoTestsAction(this.state.nf);
-                   } 
+      getInfoTestsAction: ()=>{
+        if(this.state.nf != null && this.state.flagServe ===true) {
+          this.setState({ flagServe: false});
+          // console.log(flagServe);
+          this.props.getInfoTestsAction(this.state.nf);
+          } 
       }
     }
   }
+
   componentDidMount(){
     socket.on('SC_GETNAMETESTCASE', (nameFiles) => {
         this.setState({ nf: [...nameFiles] });
       }
     )
+    // get save data.
+    socket.on('SC_SAVEDATA',(savedata_TLT)=>{
+      this.props.getTimeLastTest(savedata_TLT);
+    })
   }
 
   render() {
     setTimeout(()=>{
-      this.state.GetInfoTestsAction();
+      this.state.getInfoTestsAction();
     },100);
     
     return (
@@ -56,7 +62,8 @@ function mapStatetoProps(state){
 function mapDispatchtoProps(dispatch){ 
   return bindActionCreators(
     {
-      GetInfoTestsAction:  GetInfoTestsAction
+      getInfoTestsAction:  getInfoTestsAction,
+      getTimeLastTest: getTimeLastTest
     }, dispatch)
 }
 

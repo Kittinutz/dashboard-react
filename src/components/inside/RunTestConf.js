@@ -73,8 +73,14 @@ class RunTestConf extends Component {
   }
 
   run1Test(){
-    var date = new Date();
-    var time = date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()+'-'+date.getDate()+'/'+date.getMonth()+'/'+date.getFullYear();
+    var date = new Date(),
+        hh = (date.getHours()<10?'0':'') + date.getHours(),
+        mm = (date.getMinutes()<10?'0':'') + date.getMinutes(),
+        ss = (date.getSeconds()<10?'0':'') +date.getSeconds(),
+        d = (date.getDate()<10?'0':'') +date.getDate(),
+        m = ((date.getMonth()+1)<10?'0':'') +(date.getMonth()+1);
+
+    var time = hh+':'+mm+':'+ss+'-'+ d +'/'+ m +'/'+date.getFullYear();
     this.setState({
       running: true,
       nameTest: this.props.nameTest
@@ -83,7 +89,9 @@ class RunTestConf extends Component {
     // upload to store
     this.props.setRunTest(this.props.nameTest);
     this.props.setTimeLastTest(time, this.props.keys);
+    console.log(this.props.backup.lastTest);
     this.toggleT();
+    socket.emit('SC_BACKUP_TIMELASTTEST', this.props.backup.timeLastTest)
     socket.emit('SC_RUN_LaravelDusk', (this.props.nameTest));
     socket.on('SC_STATUS_TEST', (status)=>{
       this.props.stopTest(this.props.nameTest);
@@ -91,6 +99,7 @@ class RunTestConf extends Component {
         status: status
       });
     })
+    
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -109,7 +118,8 @@ class RunTestConf extends Component {
 function mapStatetoProps(state){ 
   return {
     ...state,
-    runTest: state.runTest
+    runTest: state.runTest,
+    backup: state.backup
   }
 }
 
