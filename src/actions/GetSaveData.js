@@ -13,9 +13,9 @@ export function getTimeLastTest(data) {
     }
 }
 
-export function getTimeTest(testTime, keys){
+export function setTimeTest(testTime, keys){
     return {
-        type: "GET_SAVETIMETEST",
+        type: "SET_SAVETIMETEST",
         payload: testTime,
         keys: keys
     }

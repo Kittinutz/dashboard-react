@@ -23,7 +23,7 @@ export const BackupStore=(state=infomations, action)=>{
             state.timeLastTest = action.payload;
             break;
 
-        case "GET_SAVETIMETEST":
+        case "SET_SAVETIMETEST":
             state.timeTest[action.keys] =  action.payload;
             break;
         default:

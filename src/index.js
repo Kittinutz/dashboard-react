@@ -10,6 +10,7 @@ import './vendor/css/sb-admin.css';
 import './vendor/css/top.css';
 import './vendor/css/Inside.css';
 import './vendor/css/log-details.css';
+import './vendor/css/results.css';
 
 import registerServiceWorker from './registerServiceWorker';
 
@@ -26,6 +27,7 @@ import {BackupStore} from './reducers/BackupStore';
 
 // Middleware
 const logger=(store)=>(next)=>(action)=>{
+    // console.log(store.getState().backup.timeTest);
     console.log("Log Action", action);
     next(action);
 }
@@ -38,7 +40,7 @@ const store=createStore(combineReducers({
  }), {},applyMiddleware(logger));
 
 store.subscribe(()=>{
-    console.log(store.getState());
+    // console.log(store.getState().backup.timeTest);
 });
 
 // store.dispatch({

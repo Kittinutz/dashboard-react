@@ -9,7 +9,7 @@ import {
  
 //actions
 import {setRunTest, stopTest, setTimeLastTest} from '../../actions/TesterAction';
-import {getTimeTest} from '../../actions/GetSaveData';
+import {setTimeTest} from '../../actions/GetSaveData';
 
 class RunTestConf extends Component {
   constructor(props) {
@@ -91,19 +91,20 @@ class RunTestConf extends Component {
     this.props.setTimeLastTest(time, this.props.keys);
 
     this.toggleT();
-    socket.emit('SC_BACKUP_TIMELASTTEST', this.props.backup.timeLastTest)
+    socket.emit('SC_BACKUP_TIMELASTTEST', this.props.backup.timeLastTest);
     socket.emit('SC_RUN_LaravelDusk', { nameTest : this.props.nameTest, keys : this.props.keys});
     socket.on('SC_STATUS_TEST', (data)=>{
-      this.props.stopTest(this.props.nameTest);
-      // console.log(data.data)
-      this.props.getTimeTest(data.testTime, data.keys);
-      this.setState({
-        status: data.status
-      });
+      if(data.status === 'stop')
+      {
+        this.props.stopTest(this.props.nameTest);
+        this.props.setTimeTest(data.testTime, data.keys);
+        this.setState({
+          status: data.status
+        });
+      }
     })
-    
   }
-
+  
   componentDidUpdate(prevProps, prevState){
     if(prevProps.runTest !== this.props.runTest){
       this.setState({
@@ -113,9 +114,7 @@ class RunTestConf extends Component {
         popoverOpenF: false,
       });
     }
-    // console
   }
-
 }
 
 function mapStatetoProps(state){ 
@@ -132,7 +131,7 @@ function mapDispatchtoProps(dispatch){
       setRunTest: setRunTest,
       stopTest: stopTest,
       setTimeLastTest: setTimeLastTest,
-      getTimeTest: getTimeTest
+      setTimeTest: setTimeTest
     }, dispatch)
 }
 

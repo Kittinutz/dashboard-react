@@ -19,7 +19,6 @@ class App extends Component {
       getInfoTestsAction: ()=>{
         if(this.state.nf != null && this.state.flagServe ===true) {
           this.setState({ flagServe: false});
-          // console.log(flagServe);
           this.props.getInfoTestsAction(this.state.nf);
           } 
       }
@@ -35,6 +34,10 @@ class App extends Component {
     socket.on('SC_SAVEDATA', (data)=>{
       this.props.getSaveData(data.saveTLT, data.saveTT);
     });
+  }
+
+  componentDidUpdate(prevProps){
+    console.log(prevProps.backup.timeTest);
   }
 
   render() {
