@@ -15,13 +15,8 @@ class App extends Component {
     super(props)
     this.state={
       nf: null,
-      flagServe: true,
-      getInfoTestsAction: ()=>{
-        if(this.state.nf != null && this.state.flagServe ===true) {
-          this.setState({ flagServe: false});
-          this.props.getInfoTestsAction(this.state.nf);
-          } 
-      }
+      flagServe: true
+      
     }
   }
 
@@ -36,13 +31,12 @@ class App extends Component {
     });
   }
 
-  componentDidUpdate(prevProps){
-    console.log(prevProps.backup.timeTest);
-  }
-
   render() {
     setTimeout(()=>{
-      this.state.getInfoTestsAction();
+      if(this.state.nf != null && this.state.flagServe ===true) {
+        this.setState({ flagServe: false});
+        this.props.getInfoTestsAction(this.state.nf);
+      }
     },100);
     
     return (

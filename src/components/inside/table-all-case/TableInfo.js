@@ -11,14 +11,12 @@ import ReadFileConf from '../ReadFileConf';
 // import SetTimeTest from './SetTimeTest';
 class TableInfo extends Component {
   render() {
-    const nameTest = this.props.nameFiles.map((nameFiles,i) =>{
+    const nameTest = this.props.getInfo.nameTest.map((nameFiles,i) =>{
       if( typeof this.props.backup.timeLastTest[i] === 'undefined' || this.props.backup.timeLastTest[i].length === 0 ){
         this.props.backup.timeLastTest[i] = '-';
-        // console.log(this.props.getInfo.timeTest[i]);
       }
       if( typeof this.props.backup.timeTest[i] === 'undefined' || this.props.backup.timeTest[i].length === 0 ){
         this.props.backup.timeTest[i] = '-';
-        // console.log(this.props.getInfo.timeTest[i]);
       }
       return (
         <tr key={i}>
@@ -27,7 +25,6 @@ class TableInfo extends Component {
           <td className="center">Fails</td>
           <td>{nameFiles}</td>
           <td>{this.props.backup.timeTest[i]}</td>
-          {/* <td><SetTimeTest timeTest={this.props.backup.timeTest[i]} keys={i} /></td> */}
           <td>{this.props.backup.timeLastTest[i]}</td>
           <td><ReadFileConf namelog={nameFiles} keys={i}/></td>
         </tr>
@@ -53,13 +50,11 @@ class TableInfo extends Component {
       </Table>
     );
   }
-  componentDidUpdate(prevProps){
-    // console.log(this.props.backup.timeTest);
-  }
 }
 function mapStatetoProps(state){ 
   return {
     ...state,
+    getInfo: state.getInfo,
     backup: state.backup
   }
 }

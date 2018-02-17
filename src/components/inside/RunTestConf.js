@@ -9,7 +9,7 @@ import {
  
 //actions
 import {setRunTest, stopTest, setTimeLastTest} from '../../actions/TesterAction';
-import {setTimeTest} from '../../actions/GetSaveData';
+import {getSaveData, setTimeTest} from '../../actions/GetSaveData';
 
 class RunTestConf extends Component {
   constructor(props) {
@@ -131,7 +131,8 @@ function mapDispatchtoProps(dispatch){
       setRunTest: setRunTest,
       stopTest: stopTest,
       setTimeLastTest: setTimeLastTest,
-      setTimeTest: setTimeTest
+      setTimeTest: setTimeTest,
+      getSaveData: getSaveData
     }, dispatch)
 }
 

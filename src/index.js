@@ -40,13 +40,22 @@ const store=createStore(combineReducers({
  }), {},applyMiddleware(logger));
 
 store.subscribe(()=>{
-    // console.log(store.getState().backup.timeTest);
+    console.log(store.getState().backup.timeTest);
 });
 
-// store.dispatch({
-//     type:"getAllFiles",
-//     payload: ["Loading"]
-// });
+// setTimeout(()=>{
+//     store.dispatch({
+//         type:"GET_NAMETESTSCASE",
+//         payload: "1233"
+//     });
+// }, 1000)
+
+// setTimeout(()=>{
+//     store.dispatch({
+//         type:"GET_NAMETESTSCASE",
+//         payload: "122"
+//     });
+// }, 2000)
 
 ReactDOM.render(
     <Provider store={store}>

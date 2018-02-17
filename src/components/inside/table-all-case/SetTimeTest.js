@@ -17,13 +17,6 @@ class SetTimeTest extends Component {
   }
 
   componentWillUpdate(prevProps, prepState){
-    // if(this.props.timeTesy === this.props.backup.timeTest){
-    //   console.log("sdsds")
-    // }
-    // // console.log(this.state);
-    // console.log(prevProps.backup.timeTest[this.props.keys]);
-    // console.log('p['+this.props.keys+'] : ' +this.props.backup.timeTest[this.props.keys]);
-    // console.log('prep['+this.props.keys+'] : '+prevProps.backup.timeTest[this.props.keys]);
     this.setState({
       timeTest : this.props.timeTest
     })
