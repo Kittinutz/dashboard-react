@@ -9,35 +9,37 @@ import Inside from './inside/Inside';
 //action
 import {getInfoTestsAction} from '../actions/GetInfoTestsAction';  
 import {getSaveData} from '../actions/GetSaveData';
+import {stopTest} from '../actions/TesterAction';
 
 class App extends Component {
   constructor(props){
     super(props)
     this.state={
       nf: null,
-      flagServe: true
+      flagServe: true,
+      saveData: null
       
     }
   }
 
   componentDidMount(){
+    socket.on('SC_SAVEDATA', (data)=>{
+      this.props.getSaveData(data.saveTLT, data.saveTT);
+    });
+
     socket.on('SC_GETNAMETESTCASE', (nameFiles) => {
         this.setState({ nf: [...nameFiles] });
       }
     );
-    // get save data.
-    socket.on('SC_SAVEDATA', (data)=>{
-      this.props.getSaveData(data.saveTLT, data.saveTT);
-    });
   }
-
+  
   render() {
     setTimeout(()=>{
       if(this.state.nf != null && this.state.flagServe ===true) {
         this.setState({ flagServe: false});
         this.props.getInfoTestsAction(this.state.nf);
       }
-    },100);
+    },500);
     
     return (
       <div className="bg-vdark v-full tx-white">
@@ -60,7 +62,8 @@ function mapDispatchtoProps(dispatch){
   return bindActionCreators(
     {
       getInfoTestsAction:  getInfoTestsAction,
-      getSaveData: getSaveData
+      getSaveData: getSaveData,
+      stopTest: stopTest
     }, dispatch)
 }
 

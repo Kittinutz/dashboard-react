@@ -9,7 +9,7 @@ import {
  
 //actions
 import {setRunTest, stopTest, setTimeLastTest} from '../../actions/TesterAction';
-import {getSaveData, setTimeTest} from '../../actions/GetSaveData';
+import {setTimeTest} from '../../actions/GetSaveData';
 
 class RunTestConf extends Component {
   constructor(props) {
@@ -89,6 +89,7 @@ class RunTestConf extends Component {
     // upload to store
     this.props.setRunTest(this.props.nameTest);
     this.props.setTimeLastTest(time, this.props.keys);
+    this.props.setTimeTest('Working...', this.props.keys);
 
     this.toggleT();
     socket.emit('SC_BACKUP_TIMELASTTEST', this.props.backup.timeLastTest);
@@ -97,12 +98,12 @@ class RunTestConf extends Component {
       if(data.status === 'stop')
       {
         this.props.stopTest(this.props.nameTest);
-        this.props.setTimeTest(data.testTime, data.keys);
         this.setState({
           status: data.status
         });
       }
-    })
+      //when stop set time test in tableinfo.js
+    });
   }
   
   componentDidUpdate(prevProps, prevState){
@@ -131,8 +132,7 @@ function mapDispatchtoProps(dispatch){
       setRunTest: setRunTest,
       stopTest: stopTest,
       setTimeLastTest: setTimeLastTest,
-      setTimeTest: setTimeTest,
-      getSaveData: getSaveData
+      setTimeTest: setTimeTest
     }, dispatch)
 }
 

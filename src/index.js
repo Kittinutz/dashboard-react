@@ -40,7 +40,7 @@ const store=createStore(combineReducers({
  }), {},applyMiddleware(logger));
 
 store.subscribe(()=>{
-    console.log(store.getState().backup.timeTest);
+    // console.log(store.getState().backup.timeTest);
 });
 
 // setTimeout(()=>{

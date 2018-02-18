@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {socket} from '../../SocketIO';
 import { 
    Table
  } from 'reactstrap';
@@ -8,8 +9,17 @@ import {
 import RunTestConf from '../RunTestConf';
 import ReadFileConf from '../ReadFileConf';
 
-// import SetTimeTest from './SetTimeTest';
+import {setTimeTest} from '../../../actions/GetSaveData';
+
 class TableInfo extends Component {
+
+  componentDidMount(){
+    // set time test when stop test
+    socket.on('SC_STATUS_TEST', (data)=>{
+        this.props.setTimeTest(data.testTime, data.keys);
+    });
+  }
+
   render() {
     const nameTest = this.props.getInfo.nameTest.map((nameFiles,i) =>{
       if( typeof this.props.backup.timeLastTest[i] === 'undefined' || this.props.backup.timeLastTest[i].length === 0 ){
@@ -62,6 +72,7 @@ function mapStatetoProps(state){
 function mapDispatchtoProps(dispatch){ 
   return bindActionCreators(
     {
+      setTimeTest: setTimeTest
     }, dispatch)
 }
 

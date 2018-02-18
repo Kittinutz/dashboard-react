@@ -27,6 +27,7 @@ export const BackupStore=(state=infomations, action)=>{
             state.timeTest[action.keys] =  action.payload;
             break;
         default:
+
     }
     return state;
 }
