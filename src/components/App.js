@@ -24,7 +24,7 @@ class App extends Component {
 
   componentDidMount(){
     socket.on('SC_SAVEDATA', (data)=>{
-      this.props.getSaveData(data.saveTLT, data.saveTT);
+      this.props.getSaveData(data.saveTLT, data.saveTT, data.saveCST);
     });
 
     socket.on('SC_GETNAMETESTCASE', (nameFiles) => {
@@ -39,7 +39,7 @@ class App extends Component {
         this.setState({ flagServe: false});
         this.props.getInfoTestsAction(this.state.nf);
       }
-    },500);
+    },100);
     
     return (
       <div className="bg-vdark v-full tx-white">

@@ -9,15 +9,17 @@ import {
 import RunTestConf from '../RunTestConf';
 import ReadFileConf from '../ReadFileConf';
 
-import {setTimeTest} from '../../../actions/GetSaveData';
+import {getTimeTest, getCaseStatus} from '../../../actions/GetSaveData';
 
 class TableInfo extends Component {
 
   componentDidMount(){
-    // set time test when stop test
-    socket.on('SC_STATUS_TEST', (data)=>{
-        this.props.setTimeTest(data.testTime, data.keys);
+    // set time test and data when stop test
+    socket.on('SC_STATUS_TEST_DATA', (data)=>{
+        this.props.getTimeTest(data.testTime, data.keys);
+        this.props.getCaseStatus(data.caseStatus, data.keys);
     });
+    console.log(this.props.backup.caseStatus);
   }
 
   render() {
@@ -28,11 +30,14 @@ class TableInfo extends Component {
       if( typeof this.props.backup.timeTest[i] === 'undefined' || this.props.backup.timeTest[i].length === 0 ){
         this.props.backup.timeTest[i] = '-';
       }
+      if( typeof this.props.backup.caseStatus[i] === 'undefined' || this.props.backup.caseStatus[i].length === 0 ){
+        this.props.backup.caseStatus[i] = 'Never tested';
+      }
       return (
         <tr key={i}>
           <th scope="row" className="center">{i+1}</th>
           <td><RunTestConf nameTest ={nameFiles} keys={i}/></td>
-          <td className="center">Fails</td>
+          <td className="center">{this.props.backup.caseStatus[i]}</td>
           <td>{nameFiles}</td>
           <td>{this.props.backup.timeTest[i]}</td>
           <td>{this.props.backup.timeLastTest[i]}</td>
@@ -72,7 +77,8 @@ function mapStatetoProps(state){
 function mapDispatchtoProps(dispatch){ 
   return bindActionCreators(
     {
-      setTimeTest: setTimeTest
+      getTimeTest: getTimeTest,
+      getCaseStatus: getCaseStatus
     }, dispatch)
 }
 

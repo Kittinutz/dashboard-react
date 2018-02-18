@@ -1,22 +1,31 @@
-export function getSaveData(dataTLT, dataTT){
+export function getSaveData(dataTLT, dataTT, dataCST){
     return{
         type: "GET_SAVE",
         payloadTLT: dataTLT,
-        payloadTT: dataTT
+        payloadTT: dataTT,
+        payloadCST: dataCST
     }
 }
 
-export function getTimeLastTest(data) {
+export function setTimeLastTest(data) {
     return {
-        type: "GET_SAVETIMELASTTEST",
+        type: "SET_SAVETIMELASTTEST",
         payload: data
     }
 }
 
-export function setTimeTest(testTime, keys){
+export function getTimeTest(testTime, keys){
     return {
-        type: "SET_SAVETIMETEST",
+        type: "GET_SAVETIMETEST",
         payload: testTime,
         keys: keys
     }
+}
+
+export function getCaseStatus(testStatus, keys){
+    return{
+        type: "GET_SAVETESTSTATUS",
+        payload: testStatus,
+        keys: keys
+    } 
 }

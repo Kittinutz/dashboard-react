@@ -9,7 +9,7 @@ import {
  
 //actions
 import {setRunTest, stopTest, setTimeLastTest} from '../../actions/TesterAction';
-import {setTimeTest} from '../../actions/GetSaveData';
+import {getTimeTest} from '../../actions/GetSaveData';
 
 class RunTestConf extends Component {
   constructor(props) {
@@ -89,12 +89,12 @@ class RunTestConf extends Component {
     // upload to store
     this.props.setRunTest(this.props.nameTest);
     this.props.setTimeLastTest(time, this.props.keys);
-    this.props.setTimeTest('Working...', this.props.keys);
+    this.props.getTimeTest('Working...', this.props.keys);
 
     this.toggleT();
     socket.emit('SC_BACKUP_TIMELASTTEST', this.props.backup.timeLastTest);
     socket.emit('SC_RUN_LaravelDusk', { nameTest : this.props.nameTest, keys : this.props.keys});
-    socket.on('SC_STATUS_TEST', (data)=>{
+    socket.on('SC_STATUS_TEST_DATA', (data)=>{
       if(data.status === 'stop')
       {
         this.props.stopTest(this.props.nameTest);
@@ -102,7 +102,7 @@ class RunTestConf extends Component {
           status: data.status
         });
       }
-      //when stop set time test in tableinfo.js
+      console.log(data.status);
     });
   }
   
@@ -132,7 +132,7 @@ function mapDispatchtoProps(dispatch){
       setRunTest: setRunTest,
       stopTest: stopTest,
       setTimeLastTest: setTimeLastTest,
-      setTimeTest: setTimeTest
+      getTimeTest: getTimeTest
     }, dispatch)
 }
 
