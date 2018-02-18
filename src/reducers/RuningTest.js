@@ -1,18 +1,25 @@
 const runTestState={
-    run : false,
-    nameTest : "",
-    runningState : false
+    running : false,
+    nameTest : null,
+    status: 'STOP'
 }
 
 export const runTestReducer=(state=runTestState, action)=>{
     switch (action.type){
-        case "run":
-            if(state.runningState === false)
+        case "TEST_RUN":
             state={
                 ...state,
-                run: true,
+                status: 'Running',
                 nameTest: action.payload,
-                runningState: true
+                running: true
+            }
+            break;
+        case "TEST_STOP":
+            state={
+                ...state,
+                status: action.payload,
+                nameTest: null,
+                running: false
             }
             break;
         default:

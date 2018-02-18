@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import {connect} from "react-redux";
-
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+// connect server
 import {socket} from './SocketIO';
-
+// components
 import Topbar from './topBar/Topbar';
 import Inside from './inside/Inside';
-// for top css
+//action
+import {getInfoTestsAction} from '../actions/GetInfoTestsAction';  
+import {getSaveData} from '../actions/GetSaveData';
+import {stopTest} from '../actions/TesterAction';
 
 class App extends Component {
   constructor(props){
@@ -13,25 +17,28 @@ class App extends Component {
     this.state={
       nf: null,
       flagServe: true,
-      getFiles: ()=>{
-                  if(this.state.nf != null && this.state.flagServe ===true) {
-                    this.setState({ flagServe: false});
-                    // console.log(flagServe);
-                    this.props.getNameFile(this.state.nf);
-                   } 
-      }
+      saveData: null
+      
     }
   }
+
   componentDidMount(){
-    socket.on('getNameFiles', (nameFiles) => {
+    socket.on('SC_SAVEDATA', (data)=>{
+      this.props.getSaveData(data.saveTLT, data.saveTT, data.saveCST);
+    });
+
+    socket.on('SC_GETNAMETESTCASE', (nameFiles) => {
         this.setState({ nf: [...nameFiles] });
       }
-    )
+    );
   }
-
+  
   render() {
     setTimeout(()=>{
-      this.state.getFiles();
+      if(this.state.nf != null && this.state.flagServe ===true) {
+        this.setState({ flagServe: false});
+        this.props.getInfoTestsAction(this.state.nf);
+      }
     },100);
     
     return (
@@ -43,22 +50,21 @@ class App extends Component {
   }
 }
 
-export const mapStatetoProps=(state)=>{ 
+function mapStatetoProps(state){ 
   return {
-    getFiles: state.getFiles
+    ...state,
+    runTest: state.runTest,
+    backup: state.backup
   }
 }
 
-const mapDispatchtoProps=(dispatch)=>{ 
-  return {
-    getNameFile:(nameFiles)=>{
-      dispatch({
-        type: "GET_NAMETESTSCASE",
-        payload: nameFiles
-      })
-      return nameFiles;
-    }
-  }
+function mapDispatchtoProps(dispatch){ 
+  return bindActionCreators(
+    {
+      getInfoTestsAction:  getInfoTestsAction,
+      getSaveData: getSaveData,
+      stopTest: stopTest
+    }, dispatch)
 }
 
 export default connect(mapStatetoProps, mapDispatchtoProps) (App);

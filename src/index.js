@@ -4,11 +4,14 @@ import App from './components/App';
 // import {startLaravelDuskTest} from './components/startLaravelDuskTest';
 // import {socket} from './components/socketIO';
 //topcss
-import './vendor/css/top.css';
-import './vendor/css/Inside.css';
+import './vendor/bootstrap4/css/bootstrap.css';
 import './vendor/css/sb-admin.css';
 // for second css
-import './vendor/bootstrap4/css/bootstrap.css';
+import './vendor/css/top.css';
+import './vendor/css/Inside.css';
+import './vendor/css/log-details.css';
+import './vendor/css/results.css';
+
 import registerServiceWorker from './registerServiceWorker';
 
 //set redux
@@ -18,26 +21,41 @@ import {createStore, combineReducers, applyMiddleware} from "redux";
 // const store=createStore(reducer, 1);
 
 // reducer
-import {getNameFilesTest} from './reducers/GetNameTestsCase';
+import {GetInfoTests} from './reducers/GetInfoTests';
 import {runTestReducer} from './reducers/RuningTest';
+import {BackupStore} from './reducers/BackupStore';
 
 // Middleware
 const logger=(store)=>(next)=>(action)=>{
+    // console.log(store.getState().backup.timeTest);
     console.log("Log Action", action);
     next(action);
 }
 
 //multiple stores
-const store=createStore(combineReducers({runTest: runTestReducer, getFiles: getNameFilesTest}), {},applyMiddleware(logger));
+const store=createStore(combineReducers({
+    runTest: runTestReducer, 
+    getInfo: GetInfoTests,
+    backup : BackupStore
+ }), {},applyMiddleware(logger));
 
-// store.subscribe(()=>{
-//     console.log(store.getState());
-// });
+store.subscribe(()=>{
+    // console.log(store.getState().backup.timeTest);
+});
 
-// store.dispatch({
-//     type:"getAllFiles",
-//     payload: ["Loading"]
-// });
+// setTimeout(()=>{
+//     store.dispatch({
+//         type:"GET_NAMETESTSCASE",
+//         payload: "1233"
+//     });
+// }, 1000)
+
+// setTimeout(()=>{
+//     store.dispatch({
+//         type:"GET_NAMETESTSCASE",
+//         payload: "122"
+//     });
+// }, 2000)
 
 ReactDOM.render(
     <Provider store={store}>
