@@ -28,7 +28,7 @@ import {BackupStore} from './reducers/BackupStore';
 // Middleware
 const logger=(store)=>(next)=>(action)=>{
     // console.log(store.getState().backup.timeTest);
-    console.log("Log Action", action);
+    // console.log("Log Action", action);
     next(action);
 }
 
@@ -40,7 +40,7 @@ const store=createStore(combineReducers({
  }), {},applyMiddleware(logger));
 
 store.subscribe(()=>{
-    // console.log(store.getState().backup.timeTest);
+    // console.log(store.getState().backup);
 });
 
 // setTimeout(()=>{

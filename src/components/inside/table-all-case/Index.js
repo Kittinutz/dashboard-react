@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {connect} from "react-redux";
 import { 
   Card, CardTitle
  } from 'reactstrap';
@@ -24,9 +23,5 @@ class Index extends Component {
   }
 }
 
-function mapStatetoProps(state){ 
-  return {
-  }
-}
 
-export default connect(mapStatetoProps) (Index);
+export default Index;

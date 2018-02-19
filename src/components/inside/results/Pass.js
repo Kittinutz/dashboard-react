@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardFooter, CardBody, CardTitle, CardText } from 'reactstrap';
+import { Card, CardBody, CardTitle} from 'reactstrap';
 
 class Pass extends Component {
   render() {
@@ -8,11 +8,10 @@ class Pass extends Component {
             <Card className="rs-body-out bg-dark rs-card-pass">
                 <CardBody className="rs-card-out-pass"> 
                     <CardTitle className="rs-headr-text">- P a s s -</CardTitle> 
-                    <CardText>
-                        0
-                    </CardText>
+                    <div className="rs-body-text" >
+                         <p className="big">{this.props.pass}</p> <p className="sm"> / {this.props.sum} </p>
+                    </div>
                 </CardBody>
-                <CardFooter className="rs-card-out-pass"> </CardFooter>
             </Card>
         </div>
     );
