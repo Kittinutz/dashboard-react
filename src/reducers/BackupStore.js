@@ -2,7 +2,7 @@ const infomations={
     timeLastTest : [],
     timeTest: [],
     caseStatus: [],
-    testStus:{
+    testStatus:{
         pass: 0,
         fails: 0,
         err: 0,
@@ -15,6 +15,9 @@ export const BackupStore=(state=infomations, action)=>{
             state.timeLastTest = action.payloadTLT;
             state.timeTest = action.payloadTT;
             state.caseStatus = action.payloadCST;
+            state.testStatus.pass = action.payloadSPS;
+            state.testStatus.fails = action.payloadSFS;
+            state.testStatus.err = action.payloadSER;
             break;
 
         case "SET_LASTTEST":
@@ -31,6 +34,14 @@ export const BackupStore=(state=infomations, action)=>{
         
         case "GET_SAVETESTSTATUS":
             state.caseStatus[action.keys] = action.payload;
+            break;
+        
+        case "GET_RESTEST":
+            state.testStatus = {
+                pass: action.payloadPass,
+                fails: action.payloadFails,
+                err: action.payloadErr
+            }
             break;
         default:
     }

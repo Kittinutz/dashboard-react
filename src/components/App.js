@@ -24,7 +24,8 @@ class App extends Component {
 
   componentDidMount(){
     socket.on('SC_SAVEDATA', (data)=>{
-      this.props.getSaveData(data.saveTLT, data.saveTT, data.saveCST);
+      this.props.getSaveData(data.saveTLT, data.saveTT, data.saveCST, data.sumPass, data.sumFails, data.sumErr);
+      // console.log(data.sumErr);
     });
 
     socket.on('SC_GETNAMETESTCASE', (nameFiles) => {

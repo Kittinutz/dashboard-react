@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardFooter, CardBody, CardTitle, CardText } from 'reactstrap';
+import { Card, CardBody, CardTitle } from 'reactstrap';
 
 class Error extends Component {
   render() {
@@ -8,11 +8,10 @@ class Error extends Component {
             <Card className="rs-body-out bg-dark rs-card-error">
                 <CardBody className="rs-card-out-error"> 
                     <CardTitle className="rs-headr-text">- E r r o r -</CardTitle> 
-                    <CardText>
-                        0
-                    </CardText>
+                    <div className="rs-body-text" >
+                         <p className="big">{this.props.err}</p> <p className="sm"> / {this.props.sum} </p>
+                    </div>
                 </CardBody>
-                <CardFooter className="rs-card-out-error"> </CardFooter>
             </Card>
         </div>
     );

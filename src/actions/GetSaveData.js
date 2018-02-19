@@ -1,9 +1,12 @@
-export function getSaveData(dataTLT, dataTT, dataCST){
+export function getSaveData(dataTLT, dataTT, dataCST, dataSPS, dataSFS, dataSER){
     return{
         type: "GET_SAVE",
         payloadTLT: dataTLT,
         payloadTT: dataTT,
-        payloadCST: dataCST
+        payloadCST: dataCST,
+        payloadSPS: dataSPS,
+        payloadSFS: dataSFS,
+        payloadSER: dataSER
     }
 }
 
@@ -28,4 +31,13 @@ export function getCaseStatus(testStatus, keys){
         payload: testStatus,
         keys: keys
     } 
+}
+
+export function getResTest(pass, fails, err){
+    return{
+        type: "GET_RESTEST",
+        payloadPass: pass,
+        payloadFails: fails,
+        payloadErr: err
+    }
 }
