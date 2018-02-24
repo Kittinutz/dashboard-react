@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
-
 import Sidebar from './Sidebar';
+
 class Topbar extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: false
+    };
+  }
+
   render() {
     return (
       <div>
@@ -15,7 +23,9 @@ class Topbar extends Component {
             aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <a className="navbar-brand" > DASHBOARD-4-TESTER </a>
+          <div className="nav-name">
+            <a> ROWater : Web Tester </a>
+          </div>
           <div className="collapse bg-dark navbar-collapse">
             <Sidebar />
           </div>
