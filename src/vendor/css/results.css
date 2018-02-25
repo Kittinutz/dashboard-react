@@ -1,0 +1,56 @@
+.rs-pd-buttom{
+    padding-bottom: 50px;
+}
+
+.rs-card-pass{
+    box-shadow: 0px 0px 10px 2px rgb(116, 255, 186);
+    border: 0px;
+}
+.rs-card-out-pass{
+    background: linear-gradient(to right, rgb(26, 194, 152), rgba(50, 136, 151, 0.350));
+    border: 0px;
+}
+
+
+.rs-card-fails{
+    box-shadow: 0px 0px 12px 3px rgb(245, 53, 28);
+    border: 0px;
+}
+.rs-card-out-fials{
+    background: linear-gradient(to right, rgb(204, 56, 56), rgba(151, 50, 72, 0.350));
+    border: 0px;
+}
+
+.rs-card-error{
+    box-shadow: 0px 0px 10px 2px rgb(255, 252, 99);
+    border: 0px;
+}
+.rs-card-out-error{
+    background: linear-gradient(to right, rgb(189, 186, 1), rgba(161, 116, 19, 0.350));
+    border: 0px;
+}
+
+.rs-headr-text{
+    text-shadow: -2px 2px black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-size: 26pt;
+    font-family: fantasy;
+}
+.rs-body-text{
+    font-family: fantasy;
+    text-shadow: -2px 2px black, 0 1px black, 1px 0 black, 0 -1px black;
+    text-align: right;
+    padding-right: 30px;
+}
+
+.rs-body-text .big{
+    font-size: 42pt;
+    margin: -12pt 0pt;
+    padding: 0px 28pt;
+}
+
+.rs-body-text .sm{
+    font-size: 14pt;
+    padding: -14px 0pt;
+    margin-top: -28pt;
+    margin-bottom: -5pt;
+}
