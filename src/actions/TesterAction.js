@@ -19,3 +19,10 @@ export function setTimeLastTest(timeTest, ID){
         payloadID: ID
     }
 }
+
+export function setNewPJs(namePJs){
+    return{
+        type: "SET_NAMEPJ",
+        payload: namePJs
+    }
+}

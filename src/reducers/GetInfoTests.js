@@ -1,6 +1,7 @@
 //store
 const storeTestsCase={
-    nameTest : []
+    nameTest : [],
+    listPJs : []
 }
 
 export const GetInfoTests=(state=storeTestsCase, action)=>{
@@ -10,7 +11,15 @@ export const GetInfoTests=(state=storeTestsCase, action)=>{
                 ...state,
                 nameTest: action.payload
             }
+            
             break;
+        case "GET_LISTPROJECTS":
+            
+            state={
+                ...state,
+                listPJs: action.payload
+            }
+            break;    
         default:
     }
     return state;

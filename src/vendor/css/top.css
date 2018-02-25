@@ -6,10 +6,10 @@
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px rgb(22, 22, 22);
     margin: -10px;
+
 }
 
 .sdow-box{
-
     box-shadow: 0px 0px 10px 0px rgb(22, 22, 22);
     margin: -10px;
 }
@@ -17,6 +17,40 @@
 .t-nav ,.nav-link-tx{
     color: white;
     text-shadow: 0 1px 5px rgb(66, 66, 66);
+}
+
+.nav-name{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    font-size: 24pt;
+    text-align: center;
+    width: 100%;
+    letter-spacing: 5pt;
+}
+
+.bt-bth{
+    border: 0px;
+    border-color: rgb(38, 65, 65);
+    background: linear-gradient(to right, rgb(213, 69, 226), rgba(184, 75, 160, 0.35));
+    box-shadow: 0px 0px 3px 2px rgb(255, 99, 229);
+    text-shadow: -2px 2px black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-size: 14pt;
+    padding: 14px;
+    font-weight: bold;
+}
+
+.bt-btg{
+    border: 0px;
+    border-color: rgb(38, 65, 65);
+    background: linear-gradient(to right, rgb(213, 69, 226), rgba(184, 75, 160, 0.35));
+    box-shadow: 0px 0px 3px 2px rgb(255, 99, 229);
+    text-shadow: -2px 2px black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-size: 14pt;
+    padding: 10px;
+    letter-spacing: 5pt;
+    font-variant: small-caps;    
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .tx-white{

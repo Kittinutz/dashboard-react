@@ -1,4 +1,5 @@
 const runTestState={
+    namePJ: null,
     running : false,
     nameTest : null,
     status: 'STOP'
@@ -20,6 +21,12 @@ export const runTestReducer=(state=runTestState, action)=>{
                 status: action.payload,
                 nameTest: null,
                 running: false
+            }
+            break;
+        case "SET_NAMEPJ":
+            state={
+                ...state,
+                namePJ: action.payload
             }
             break;
         default:
