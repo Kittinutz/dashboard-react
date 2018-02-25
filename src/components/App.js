@@ -7,7 +7,7 @@ import {socket} from './SocketIO';
 import Topbar from './topBar/Topbar';
 import Inside from './inside/Inside';
 //action
-import {getInfoTestsAction} from '../actions/GetInfoTestsAction';  
+import {getNameFiles, getListPJs} from '../actions/GetInfoTestsAction';  
 import {getSaveData} from '../actions/GetSaveData';
 import {stopTest} from '../actions/TesterAction';
 
@@ -15,33 +15,44 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state={
-      nf: null,
+      nf: [],
       flagServe: true,
       saveData: null
-      
     }
   }
 
   componentDidMount(){
     socket.on('SC_SAVEDATA', (data)=>{
-      this.props.getSaveData(data.saveTLT, data.saveTT, data.saveCST, data.sumPass, data.sumFails, data.sumErr);
-      // console.log(data.sumErr);
+      this.props.getSaveData(
+        data.saveTLT,
+        data.saveTT,
+        data.saveCST,
+        data.sumPass,
+        data.sumFails,
+        data.sumErr
+      );
     });
-
+    socket.on('SC_GETPROJECTS', (listPJ)=>{
+      this.props.getListPJs(listPJ);
+      console.log(listPJ);
+    })
     socket.on('SC_GETNAMETESTCASE', (nameFiles) => {
-        this.setState({ nf: [...nameFiles] });
+        this.setState({ nf: nameFiles });
       }
     );
   }
+
+  componentDidUpdate(prevProps, prevState){
+    if(prevState.nf[0] !== this.state.nf[0]){
+      this.setState({
+        flagServe: true
+      });
+      this.props.getNameFiles(this.state.nf);
+    }
+  }
   
   render() {
-    setTimeout(()=>{
-      if(this.state.nf != null && this.state.flagServe ===true) {
-        this.setState({ flagServe: false});
-        this.props.getInfoTestsAction(this.state.nf);
-      }
-    },100);
-    
+
     return (
       <div className="bg-vdark v-full tx-white">
         <Topbar />
@@ -62,7 +73,8 @@ function mapStatetoProps(state){
 function mapDispatchtoProps(dispatch){ 
   return bindActionCreators(
     {
-      getInfoTestsAction:  getInfoTestsAction,
+      getNameFiles:  getNameFiles,
+      getListPJs: getListPJs,
       getSaveData: getSaveData,
       stopTest: stopTest
     }, dispatch)

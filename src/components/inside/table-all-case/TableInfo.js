@@ -10,20 +10,39 @@ import RunTestConf from '../RunTestConf';
 import ReadFileConf from '../ReadFileConf';
 
 import {getTimeTest, getCaseStatus} from '../../../actions/GetSaveData';
-
 class TableInfo extends Component {
-
+  constructor(props){
+    super(props)
+    this.state={
+      nameTest: [],
+      resetInfo: false
+    }
+  }
+    
   componentDidMount(){
     // set time test and data when stop test
     socket.on('SC_STATUS_TEST_DATA', (data)=>{
         this.props.getTimeTest(data.testTime, data.keys);
         this.props.getCaseStatus(data.caseStatus, data.keys);
     });
-    console.log(this.props.backup.caseStatus);
+
+    socket.on('SC_RESET', (namePJs)=>{
+       this.setState({
+         resetInfo: true
+       });
+    });
   }
 
+  componentDidUpdate(prevProp, prevState){
+    if(prevProp.getInfo.nameTest !== this.props.getInfo.nameTest){
+      this.setState({
+        nameTest : this.props.getInfo.nameTest
+      });
+    }
+  }
+  
   render() {
-    const nameTest = this.props.getInfo.nameTest.map((nameFiles,i) =>{
+    var nameTest = this.state.nameTest.map((nameFiles,i) =>{
       if( typeof this.props.backup.timeLastTest[i] === 'undefined' || this.props.backup.timeLastTest[i].length === 0 ){
         this.props.backup.timeLastTest[i] = '-';
       }
@@ -33,7 +52,7 @@ class TableInfo extends Component {
       if( typeof this.props.backup.caseStatus[i] === 'undefined' || this.props.backup.caseStatus[i].length === 0 ){
         this.props.backup.caseStatus[i] = 'Never tested';
       }
-      return (
+      return [
         <tr key={i}>
           <th scope="row" className="center">{i+1}</th>
           <td><RunTestConf nameTest ={nameFiles} keys={i}/></td>
@@ -43,9 +62,9 @@ class TableInfo extends Component {
           <td>{this.props.backup.timeLastTest[i]}</td>
           <td><ReadFileConf namelog={nameFiles} keys={i}/></td>
         </tr>
-      )
+      ]
     });
-    
+
     return (
       <Table striped >
         <thead>

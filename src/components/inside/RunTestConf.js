@@ -16,11 +16,15 @@ class RunTestConf extends Component {
     super(props);
     this.toggleT = this.toggleT.bind(this);
     this.toggleF = this.toggleF.bind(this);
+    this.run1Test = this.run1Test.bind(this);
     this.state = {
       popoverOpenT: false,
       popoverOpenF: false,
       running: this.props.runTest.running,
-      nameTest: this.props.runTest.nameTest,
+      nameFile: this.props.runTest.nameTest,
+      nameTest: this.props.nameTest,
+      timeLastTest: this.props.backup.timeLastTest,
+      keys: this.props.keys,
       state: null
     };
   }
@@ -28,24 +32,24 @@ class RunTestConf extends Component {
   render() {
     return (
         <div>  
-          <Button id={this.props.nameTest} color="danger" className="btn-table" onClick={this.selectPop.bind(this)}> RUN </Button>
-          <Popover className="popover-in-table" target={this.props.nameTest} placement="bottom" isOpen={this.state.popoverOpenT}  toggle={this.toggleT}>
-            <PopoverHeader> {this.props.nameTest} ?</PopoverHeader>
+          <Button id={this.state.nameTest} color="danger" className="btn-table" onClick={this.selectPop.bind(this)}> RUN </Button>
+          <Popover className="popover-in-table" target={this.state.nameTest} placement="bottom" isOpen={this.state.popoverOpenT}  toggle={this.toggleT}>
+            <PopoverHeader> {this.state.nameTest} ?</PopoverHeader>
             <PopoverBody>  
                 <Button className="btn-table right"
                   onClick={this.toggleT}
                 >No</Button>
 
                 <Button color="success" className="btn-table right"  
-                  onClick={this.run1Test.bind(this)}
+                  onClick={this.run1Test}
                 > Yes</Button>
             </PopoverBody>
           </Popover>
 
-          <Popover target={this.props.nameTest} placement="bottom" isOpen={this.state.popoverOpenF}  toggle={this.toggleF}>
+          <Popover target={this.state.nameTest} placement="bottom" isOpen={this.state.popoverOpenF}  toggle={this.toggleF}>
             <PopoverHeader> STOP!</PopoverHeader>
             <PopoverBody>  
-              System working with {this.state.nameTest}.
+              System working with {this.state.nameFile}.
             </PopoverBody>
           </Popover>
         </div>
@@ -84,35 +88,44 @@ class RunTestConf extends Component {
     var time = hh+':'+mm+':'+ss+'-'+ d +'/'+ m +'/'+date.getFullYear();
     this.setState({
       running: true,
-      nameTest: this.props.nameTest
+      nameTest: this.state.nameTest
     });
     // upload to store
-    this.props.setRunTest(this.props.nameTest);
-    this.props.setTimeLastTest(time, this.props.keys);
-    this.props.getTimeTest('Working...', this.props.keys);
-
+    this.props.setRunTest(this.state.nameTest);
+    this.props.setTimeLastTest(time, this.state.keys);
+    this.props.getTimeTest('Working...', this.state.keys);
+    console.log(this.state.keys);
     this.toggleT();
-    socket.emit('SC_BACKUP_TIMELASTTEST', this.props.backup.timeLastTest);
-    socket.emit('SC_RUN_LaravelDusk', { nameTest : this.props.nameTest, keys : this.props.keys});
+    socket.emit('SC_BACKUP_TIMELASTTEST', this.state.timeLastTest);
+    socket.emit('SC_RUN_LaravelDusk', { nameTest : this.state.nameTest, keys : this.state.keys});
     socket.on('SC_STATUS_TEST_DATA', (data)=>{
       if(data.status === 'stop')
       {
-        this.props.stopTest(this.props.nameTest);
+        this.props.stopTest(this.state.nameTest);
         this.setState({
           status: data.status
         });
       }
       console.log(data.status);
     });
+    // sendSocket();
   }
   
   componentDidUpdate(prevProps, prevState){
     if(prevProps.runTest !== this.props.runTest){
       this.setState({
         running: this.props.runTest.running,
-        nameTest: this.props.runTest.nameTest,
+        nameFile: this.props.runTest.nameTest,
         popoverOpenT: false,
         popoverOpenF: false,
+      });
+    }
+    if(prevState.nameTest !== this.props.nameTest){
+      // console.log(prevState.nameTest);
+      this.setState({
+        nameTest: this.props.nameTest,
+        keys: this.props.keys,
+        timeLastTest: this.props.backup.timeLastTest
       });
     }
   }

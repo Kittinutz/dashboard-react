@@ -1,25 +1,34 @@
 import React, { Component } from 'react';
+import {socket} from '../SocketIO';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import { Button, ButtonGroup, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+
+import {setNewPJs} from '../../actions/TesterAction';
 
 class Sidebar extends Component {
 
     constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
-    this.selected = this.selected.bind(this);
+    // this.selectPJs = this.selectPJs.bind(this);
     this.state = {
       projects: null,
       dropdownOpen: false
     };
   }
 
-  toggle() {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen
-    });
-  }
-
   render() {
+    const listPJs = this.props.getInfo.listPJs.map((namePJ, i) =>{
+      if(namePJ === null){
+        return "Not Found You Test Driven."
+      }
+      else{
+        return (
+          <DropdownItem key={i} onClick={this.selectPJs.bind(this, namePJ)}>{namePJ}</DropdownItem>
+        )
+      }
+    });
     return (
         <div>
             <ul className="navbar-nav bg-dark navbar-sidenav sdow-sidenav">
@@ -29,20 +38,43 @@ class Sidebar extends Component {
                   Select Your Test Driven
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem header>Header</DropdownItem>
-                    <DropdownItem disabled>Action</DropdownItem>
-                    <DropdownItem>Another Action</DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem>Another Action</DropdownItem>
+                    {listPJs}
                   </DropdownMenu>
                 </ButtonDropdown>
-                <Button className="bg-vdark bt-btg">1</Button>
-                <Button className="bg-vdark bt-btg">2</Button>
+                <Button className="bg-vdark bt-btg">Dashboard</Button>
+                <Button className="bg-vdark bt-btg">Test Engine</Button>
+                <Button className="bg-vdark bt-btg">Case Lists</Button>
               </ButtonGroup>
             </ul>
         </div>
     );
   }
+
+  toggle() {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
+    });
+  }
+
+  selectPJs(namePJ){
+    this.props.setNewPJs(namePJ);
+    socket.emit('SC_SENDNAMEPJs', namePJ);
+    console.log('Selected : '+namePJ);
+  }
+
 }
 
-export default Sidebar;
+function mapStatetoProps(state){ 
+  return {
+    ...state,
+    getInfo: state.getInfo
+  }
+}
+
+function mapDispatchtoProps(dispatch){ 
+  return bindActionCreators(
+    {
+      setNewPJs: setNewPJs
+    }, dispatch)
+}
+export default connect(mapStatetoProps, mapDispatchtoProps) (Sidebar);
