@@ -3,18 +3,18 @@ import {
   Card, CardTitle
  } from 'reactstrap';
 
-import TableInfo from './TableInfo'; 
+// import TableInfo from './TableInfo'; 
 
-class Index extends Component {
+class TableCaseLists extends Component {
 
   render() {
     return (
       <Card className="mb-3 bg-dark sdow-box magin-center">
         <div className="card-header">
-          <CardTitle> Main Case Table </CardTitle>
+          <CardTitle> Table: Case Lists </CardTitle>
         </div>
         <div className="bg-svdark overTable">
-          <TableInfo />
+          {/* <TableInfo /> */}
         </div>
         <div className="card-footer small text-muted">Updated yesterday at 11:59 PM
         </div>
@@ -23,5 +23,4 @@ class Index extends Component {
   }
 }
 
-
-export default Index;
+export default TableCaseLists;

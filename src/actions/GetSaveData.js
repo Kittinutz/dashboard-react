@@ -10,26 +10,28 @@ export function getSaveData(dataTLT, dataTT, dataCST, dataSPS, dataSFS, dataSER)
     }
 }
 
-export function setTimeLastTest(data) {
-    return {
-        type: "SET_SAVETIMELASTTEST",
-        payload: data
-    }
-}
+// export function setTimeLastTest(data) {
+//     return {
+//         type: "SET_SAVETIMELASTTEST",
+//         payload: data
+//     }
+// }
 
-export function getTimeTest(testTime, keys){
+export function getTimeTest(testTime, keys, drive){
     return {
         type: "GET_SAVETIMETEST",
         payload: testTime,
-        keys: keys
+        keys: keys,
+        drive: drive
     }
 }
 
-export function getCaseStatus(testStatus, keys){
+export function getCaseStatus(testStatus, keys, drive){
     return{
         type: "GET_SAVETESTSTATUS",
         payload: testStatus,
-        keys: keys
+        keys: keys,
+        drive: drive
     } 
 }
 
