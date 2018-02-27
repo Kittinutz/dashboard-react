@@ -66,9 +66,13 @@ class TablePriorityCase extends Component {
   }
 
   setPriName =() =>{
-    if(this.state.newPriority.search(" ") === -1){
+    if(this.state.newPriority.search(" ") === -1 &&  this.state.namePJ !== null){
       this.toggle();
-      socket.emit("PR_BACKUPNEWPR", ('priority-data/', this.state.namePJ, this.state.newPriority));
+      socket.emit('PR_BACKUPNEWPR', {
+        drive:'priority-data', 
+        namePJ: this.state.namePJ, 
+        newPri: this.state.newPriority}
+      );
       this.props.setNewPriority(this.state.newPriority);
       this.setState({
         newPriority: ''

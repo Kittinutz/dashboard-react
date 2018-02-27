@@ -43,7 +43,7 @@
 .bt-btg{
     text-shadow: -2px 2px black, 0 1px black, 1px 0 black, 0 -1px black;
     font-size: 14pt;
-    border-width : 0px 0px 0px 40px;
+    border-width : 2px 2px 2px 50px;
     padding: 10px;
     letter-spacing: 5pt;
     font-variant: small-caps;    

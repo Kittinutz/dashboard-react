@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {socket} from '../../../SocketIO';
 import { 
    Table
  } from 'reactstrap';
 
 import RunTestConf from '../RunTestConf';
 import ReadFileConf from '../ReadFileConf';
-
-import {getTimeTest, getCaseStatus} from '../../../../actions/GetSaveData';
 
 class TBinfo extends Component {
   constructor(props){
@@ -20,14 +17,6 @@ class TBinfo extends Component {
     }
   }
     
-  componentDidMount(){
-    // set time test and data when stop test
-    socket.on('SC_STATUS_TEST_DATA', (data)=>{
-        this.props.getTimeTest(data.testTime, data.keys);
-        this.props.getCaseStatus(data.caseStatus, data.keys);
-    });
-  }
-
   componentDidUpdate(prevProp, prevState){
     if(prevProp.runTest.priTest !== this.props.runTest.priTest){
       this.setState({
@@ -51,11 +40,11 @@ class TBinfo extends Component {
         <tr key={i}>
           <th scope="row" className="center">{i+1}</th>
           <td><RunTestConf drive='priority-data' nameTest={priName} keys={i}/></td>
-          <td className="center">{this.props.backup.caseStatus[1][i]}</td>
+          <td>{this.props.backup.caseStatus[1][i]}</td>
           <td>{priName}</td>
           <td>{this.props.backup.timeTest[1][i]}</td>
           <td>{this.props.backup.timeLastTest[1][i]}</td>
-          <td><ReadFileConf namelog={priName} keys={i}/></td>
+          <td><ReadFileConf drive='priority-data' namelog={priName} keys={i}/></td>
         </tr>
       ]
     });
@@ -92,8 +81,6 @@ function mapStatetoProps(state){
 function mapDispatchtoProps(dispatch){ 
   return bindActionCreators(
     {
-      getTimeTest: getTimeTest,
-      getCaseStatus: getCaseStatus
     }, dispatch)
 }
 

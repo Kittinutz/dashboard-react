@@ -35,6 +35,13 @@ export function setMenuTap(tabID){
     }
 }
 
+export function getListPri(listPri){
+    return{
+        type: "GET_LISTPRI",
+        payload: listPri
+    }
+}
+
 export function setNewPriority(priName){
     return{
         type: "SET_NEWPRITEST",

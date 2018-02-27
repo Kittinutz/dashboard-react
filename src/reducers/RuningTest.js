@@ -37,6 +37,12 @@ export const runTestReducer=(state=runTestState, action)=>{
                 tabID: action.payload   
             }
             break;
+        case "GET_LISTPRI":
+            state={
+                ...state,
+                priTest: action.payload
+            }
+            break;
         case "SET_NEWPRITEST":
             state={
                 ...state,

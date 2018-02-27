@@ -9,7 +9,7 @@ import Inside from './inside/Inside';
 //action
 import {getNameFiles, getListPJs} from '../actions/GetInfoTestsAction';  
 import {getSaveData} from '../actions/GetSaveData';
-import {stopTest} from '../actions/TesterAction';
+import {stopTest, getListPri} from '../actions/TesterAction';
 
 class App extends Component {
   constructor(props){
@@ -31,6 +31,7 @@ class App extends Component {
         data.sumFails,
         data.sumErr
       );
+      this.props.getListPri(data.listPri);
     });
     socket.on('SC_GETPROJECTS', (listPJ)=>{
       this.props.getListPJs(listPJ);
@@ -76,7 +77,8 @@ function mapDispatchtoProps(dispatch){
       getNameFiles:  getNameFiles,
       getListPJs: getListPJs,
       getSaveData: getSaveData,
-      stopTest: stopTest
+      stopTest: stopTest,
+      getListPri: getListPri
     }, dispatch)
 }
 

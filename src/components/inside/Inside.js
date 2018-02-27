@@ -61,7 +61,7 @@ class Inside extends Component {
           </TabPane>
           <TabPane tabId="2">
             <div className="container-fluid">
-              {/* <TablePriorityCase /> */}
+              <TablePriorityCase />
               <TableSigleCase />
             </div>
           </TabPane> 

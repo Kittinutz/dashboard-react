@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-// import {socket} from '../../../SocketIO';
 import { 
    Table
  } from 'reactstrap';
@@ -17,15 +16,7 @@ class TBinfo extends Component {
       resetInfo: false
     }
   }
-    
-  // componentDidMount(){
-  //   // set time test and data when stop test
-  //   socket.on('SC_STATUS_TEST_DATA', (data)=>{
-  //       this.props.getTimeTest(data.testTime, data.keys);
-  //       this.props.getCaseStatus(data.caseStatus, data.keys);
-  //   });
-  // }
-
+  
   componentDidUpdate(prevProp, prevState){
     if(prevProp.getInfo.nameTest !== this.props.getInfo.nameTest){
       this.setState({
@@ -49,7 +40,7 @@ class TBinfo extends Component {
         <tr key={i}>
           <th scope="row" className="center">{i+1}</th>
           <td><RunTestConf drive='normal-data' nameTest ={nameFiles} keys={i}/></td>
-          <td className="center">{this.props.backup.caseStatus[0][i]}</td>
+          <td>{this.props.backup.caseStatus[0][i]}</td>
           <td>{nameFiles}</td>
           <td>{this.props.backup.timeTest[0][i]}</td>
           <td>{this.props.backup.timeLastTest[0][i]}</td>
