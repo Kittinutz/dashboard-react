@@ -33,7 +33,7 @@ class TablePriorityCase extends Component {
 
   render() {
     return (
-      <Card className="mb-3 bg-dark sdow-box magin-center">
+      <Card className="mb-3 tb-PriCase-Head sdow-box magin-center">
         <div className="card-header">
           <CardTitle> Table: Test Priority Case </CardTitle>
           <div>
@@ -46,7 +46,7 @@ class TablePriorityCase extends Component {
             <Input type="text" value={this.state.newPriority} onChange={this.getPriName} placeholder={this.state.status} />
           </InputGroup>
         </Collapse>
-        <div className="bg-svdark overTable">
+        <div className="tb-PriCase overTable">
           <TBinfo />
         </div>
         <div className="card-footer small text-muted">

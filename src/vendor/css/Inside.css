@@ -1,15 +1,45 @@
 .table-mini{
     width: 3em;
-    text-align: center;
+    text-align: left;
+}
+
+.tb-ListCase-Head{
+    background: linear-gradient(to right, rgb(74, 206, 230), rgba(186, 28, 218, 0.781));
+}
+
+.tb-ListCase{
+    background-color: rgb(58, 0, 63);
+}
+
+.tb-PriCase-Head{
+    background: linear-gradient(to right, rgb(197, 7, 156) -20%, rgb(172, 120, 7));
+}
+
+.tb-PriCase{
+    background-color: rgb(15, 0, 19)
 }
 
 .tb-singleCase-Head{
-    background-color: rgb(2, 163, 150);
-    text-shadow: -1px 1px black, 0 1px black, 1px 0 black, 0 -1px black;
+    background: linear-gradient(to right, rgb(26, 194, 152), rgba(50, 136, 151, 0.350));
+}
+.tb-singleCase{
+    background-color: rgb(2, 26, 20)
 }
 
-.tb-singleCase{
-    background-color: rgb(24, 54, 47)
+.tb-ErrCase-Head{
+    background: linear-gradient(to right, rgb(189, 161, 37), rgb(172, 87, 7));
+}
+
+.tb-ErrCase{
+    background-color:   rgb(34, 26, 5);
+}
+
+.tb-FailsCase-Head{
+    background: linear-gradient(to right, rgb(163, 31, 31), rgb(143, 4, 46));
+}
+
+.tb-FailsCase{
+    background-color:   rgb(34, 2, 2);
 }
 
 .card{
@@ -18,7 +48,7 @@
 
 .table-Lmini{
     width: 12em;
-    text-align: center;
+    text-align: left;
     padding: 5px;
 }
 

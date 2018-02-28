@@ -3,18 +3,18 @@ import {
   Card, CardTitle
  } from 'reactstrap';
 
-// import TableInfo from './TableInfo'; 
+import TBinfo from './TBinfo';
 
 class TableFailsLists extends Component {
 
   render() {
     return (
-      <Card className="mb-3 bg-dark sdow-box magin-center">
+      <Card className="mb-3  tb-FailsCase-Head  sdow-box magin-center">
         <div className="card-header">
-          <CardTitle> Table: Fials Lists </CardTitle>
+          <CardTitle> Table: Fails Case </CardTitle>
         </div>
-        <div className="bg-svdark overTable">
-          {/* <TableInfo /> */}
+        <div className=" tb-FailsCase overTable">
+          <TBinfo />
         </div>
         <div className="card-footer small text-muted">Updated yesterday at 11:59 PM
         </div>
