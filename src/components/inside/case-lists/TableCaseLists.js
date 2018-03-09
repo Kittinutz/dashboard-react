@@ -23,15 +23,15 @@ class TableCaseLists extends Component {
 
   render() {
     return (
-      <Card className="mb-3 tb-ListCase-Head  sdow-box magin-center">
-        <div className="card-header">
+      <Card className="mb-3 tb-set sdow-box magin-center">
+        <div className="tb-ListCase-Head card-header">
           <CardTitle> {this.state.nameTestDriven} : Case Lists </CardTitle>
         </div>
         <div className="tb-ListCase overTable">
             <TBinfo />
         </div>
-        <div className="card-footer small text-muted">Updated yesterday at 11:59 PM
-        </div>
+        {/* <div className="tb-ListCase card-footer small text-muted">Updated yesterday at 11:59 PM
+        </div> */}
       </Card>
     );
   }

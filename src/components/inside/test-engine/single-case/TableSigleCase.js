@@ -10,15 +10,15 @@ class TableSigleCase extends Component {
 
   render() {
     return (
-      <Card className="mb-3  tb-singleCase-Head  sdow-box magin-center">
-        <div className="card-header">
+      <Card className="mb-3  tb-set  sdow-box magin-center">
+        <div className="tb-singleCase-Head card-header">
           <CardTitle> Table: Test Single Case </CardTitle>
         </div>
-        <div className=" tb-singleCase overTable">
+        <div className="tb-singleCase overTable">
           <TBinfo />
         </div>
-        <div className="card-footer small text-muted">Updated yesterday at 11:59 PM
-        </div>
+        {/* <div className="tb-singleCase card-footer small text-muted">Updated yesterday at 11:59 PM
+        </div> */}
       </Card>
     );
   }

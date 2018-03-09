@@ -21,6 +21,15 @@ class App extends Component {
     }
   }
 
+  render() {
+    return (
+      <div className="bg-vdark v-full tx-white">
+        <Topbar />
+        <Inside />
+      </div>
+    );
+  }
+
   componentDidMount(){
     socket.on('SC_SAVEDATA', (data)=>{
       this.props.getSaveData(
@@ -50,16 +59,6 @@ class App extends Component {
       });
       this.props.getNameFiles(this.state.nf);
     }
-  }
-  
-  render() {
-
-    return (
-      <div className="bg-vdark v-full tx-white">
-        <Topbar />
-        <Inside />
-      </div>
-    );
   }
 }
 

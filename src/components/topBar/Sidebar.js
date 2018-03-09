@@ -30,6 +30,7 @@ class Sidebar extends Component {
         )
       }
     });
+    
     return (
         <div>
             <ul className="navbar-nav bg-dark navbar-sidenav sdow-sidenav">

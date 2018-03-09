@@ -33,8 +33,8 @@ class TablePriorityCase extends Component {
 
   render() {
     return (
-      <Card className="mb-3 tb-PriCase-Head sdow-box magin-center">
-        <div className="card-header">
+      <Card className="mb-3 tb-set sdow-box magin-center">
+        <div className="tb-PriCase-Head card-header">
           <CardTitle> Table: Test Priority Case </CardTitle>
           <div>
             <Button color="success" className="btn-table" onClick={this.toggle}> Add Priority </Button>
@@ -49,16 +49,16 @@ class TablePriorityCase extends Component {
         <div className="tb-PriCase overTable">
           <TBinfo />
         </div>
-        <div className="card-footer small text-muted">
+        {/* <div className="tb-PriCase card-footer small text-muted">
           Updated yesterday at 11:59 PM
-        </div>
+        </div> */}
       </Card>
     );
   }
 
   getPriName = (e) =>{
     let newPri = e.target.value;
-    if(this.state.namePJ !== null){
+    if(this.state.namePJ !== null || newPri !== ''){
       this.setState({
         newPriority: newPri
       });
@@ -66,7 +66,7 @@ class TablePriorityCase extends Component {
   }
 
   setPriName =() =>{
-    if(this.state.newPriority.search(" ") === -1 &&  this.state.namePJ !== null){
+    if((this.state.newPriority !== '' && this.state.newPriority.search("") === -1) &&  this.state.namePJ !== null){
       this.toggle();
       socket.emit('PR_BACKUPNEWPR', {
         drive:'priority-data', 

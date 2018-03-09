@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {socket} from '../SocketIO';
 import {bindActionCreators} from 'redux';
-import { TabContent, TabPane } from 'reactstrap';
+import {Collapse, TabContent, TabPane } from 'reactstrap';
 
 // tabID 1
 import Results from './dashboard/results/Results';
@@ -22,7 +22,11 @@ class Inside extends Component {
   constructor(props){
     super(props);
     this.state = {
-      activeTab: this.props.runTest.tabID
+      activeTab: this.props.runTest.tabID,
+      fails: 0,
+      err: 0,
+      tb_fails: false,
+      tb_err: false
     };
   }
 
@@ -40,12 +44,43 @@ class Inside extends Component {
     });
   }
   
-  componentDidUpdate(){
+  componentDidUpdate(prevProps, prevState){
     if(this.props.runTest.tabID !== this.state.activeTab){
         this.setState({
             activeTab: this.props.runTest.tabID
         })
     }
+
+    if(this.props.backup.testStatus.err !== this.state.err ){
+      if(this.props.backup.testStatus.err !== 0){
+        this.setState({
+          err: this.props.backup.testStatus.err,
+          tb_err: true
+        });
+      }
+      else{
+        this.setState({
+          err: this.props.backup.testStatus.err,
+          tb_err: false
+        });
+      }
+    }
+
+    if(this.props.backup.testStatus.fails !== this.state.fails ){
+      if(this.props.backup.testStatus.fails !== 0){
+        this.setState({
+          fails: this.props.backup.testStatus.fails,
+          tb_fails: true
+        });
+      }
+      else{
+        this.setState({
+          fails: this.props.backup.testStatus.fails,
+          tb_fails: false
+        });
+      }
+    }
+    // console.log(this.props.backup.testStatus.err +' vs '+ this.state.err);
   }
 
   render() {
@@ -55,13 +90,19 @@ class Inside extends Component {
           <TabPane tabId="1">
             <Results />
             <div className="container-fluid">
-              <TableFailsLists />
-              <TableErrLists />  
+              <Collapse isOpen={this.state.tb_fails}>
+                <TableFailsLists />
+                <div className="space-tb"> </div>
+              </Collapse>
+              <Collapse isOpen={this.state.tb_err}>
+                <TableErrLists />
+              </Collapse>
             </div>
           </TabPane>
           <TabPane tabId="2">
             <div className="container-fluid">
-              <TablePriorityCase />
+              <TablePriorityCase/>
+              <div className="space-tb"> </div>
               <TableSigleCase />
             </div>
           </TabPane> 
@@ -79,7 +120,8 @@ class Inside extends Component {
 function mapStatetoProps(state){ 
   return {
       ...state,
-      runTest: state.runTest
+      runTest: state.runTest,
+      backup: state.backup
   }
 }
 

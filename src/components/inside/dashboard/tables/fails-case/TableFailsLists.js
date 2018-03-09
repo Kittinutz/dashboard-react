@@ -9,15 +9,15 @@ class TableFailsLists extends Component {
 
   render() {
     return (
-      <Card className="mb-3  tb-FailsCase-Head  sdow-box magin-center">
-        <div className="card-header">
+      <Card className="mb-3 tb-set sdow-box magin-center">
+        <div className="card-header tb-FailsCase-Head">
           <CardTitle> Table: Fails Case </CardTitle>
         </div>
         <div className=" tb-FailsCase overTable">
           <TBinfo />
         </div>
-        <div className="card-footer small text-muted">Updated yesterday at 11:59 PM
-        </div>
+        {/* <div className="tb-FailsCase card-footer small text-muted">Updated yesterday at 11:59 PM
+        </div> */}
       </Card>
     );
   }

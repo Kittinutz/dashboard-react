@@ -24,7 +24,7 @@ class Topbar extends Component {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="nav-name">
-            <a> ROWater : Web Tester </a>
+            <a dusk="laravel">ROWater : Web Tester</a>
           </div>
           <div className="collapse bg-dark navbar-collapse">
             <Sidebar />
