@@ -1,15 +1,70 @@
 .table-mini{
     width: 3em;
-    text-align: center;
+    text-align: left;
+}
+
+.space-tb{
+    height: 30px;
+}
+
+.tb-ListCase-Head{
+    background: linear-gradient(to right, rgba(57, 225, 255, 0.753), rgba(186, 28, 218, 0.651));
+    text-shadow: -2px 2px black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.tb-ListCase{
+    background-color: rgb(58, 0, 63);
+}
+
+.tb-PriCase-Head{
+    background: linear-gradient(to right, rgb(177, 14, 77) -20%, rgba(167, 122, 26, 0.76));
+    text-shadow: -2px 2px black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.tb-PriCase{
+    background-color: rgb(15, 0, 19)
+}
+
+.tb-singleCase-Head{
+    background: linear-gradient(to right, rgb(18, 153, 119), rgba(50, 136, 151, 0.350));
+    text-shadow: -2px 2px black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+.tb-singleCase{
+    background-color: rgb(2, 26, 20)
+}
+
+.tb-ErrCase-Head{
+    background: linear-gradient(to right, rgb(168, 166, 37), rgba(172, 87, 7, 0.555));
+    text-shadow: -2px 2px black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.tb-ErrCase{
+    background-color:   rgb(34, 26, 5);
+}
+
+.tb-FailsCase-Head{
+    background: linear-gradient(to right, rgba(163, 18, 18, 0.836), rgb(54, 0, 23));
+    text-shadow: -2px 2px black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.tb-FailsCase{
+    background-color:   rgb(34, 2, 2);
 }
 
 .card{
     max-width: 60em;
 }
 
+.tb-set{
+    border-color: rgb(26, 26, 26);
+    border-width: 2.5px;
+    background-color: black;
+}
+
 .table-Lmini{
-    width: 10em;
-    text-align: center;
+    width: 12em;
+    text-align: left;
+    padding: 5px;
 }
 
 .table-name{

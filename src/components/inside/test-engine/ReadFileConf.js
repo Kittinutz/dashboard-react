@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {socket} from '../SocketIO';
+import {socket} from '../../SocketIO';
 // import {connect} from "react-redux";
 import { 
    Button, Modal, ModalHeader, ModalBody, ModalFooter 
@@ -39,7 +39,7 @@ class ReadFileConf extends Component {
       modal: !this.state.modal,
       data: 'Loading...'
     });
-    socket.emit('read-logfiles', this.props.namelog);
+    socket.emit('read-logfiles', {drive: this.props.drive, namelog: this.props.namelog});
     socket.on('client-read', (logData)=>{
       setTimeout(()=>{
         this.setState({

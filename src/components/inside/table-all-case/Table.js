@@ -5,7 +5,7 @@ import {
 
 import TableInfo from './TableInfo'; 
 
-class Index extends Component {
+class Table extends Component {
 
   render() {
     return (
@@ -23,5 +23,4 @@ class Index extends Component {
   }
 }
 
-
-export default Index;
+export default Table;

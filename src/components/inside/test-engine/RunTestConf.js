@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {socket} from '../SocketIO';
+import {socket} from '../../SocketIO';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -8,8 +8,8 @@ import {
  } from 'reactstrap';
  
 //actions
-import {setRunTest, stopTest, setTimeLastTest} from '../../actions/TesterAction';
-import {getTimeTest} from '../../actions/GetSaveData';
+import {setRunTest, stopTest, setTimeLastTest} from '../../../actions/TesterAction';
+import {getTimeTest} from '../../../actions/GetSaveData';
 
 class RunTestConf extends Component {
   constructor(props) {
@@ -92,12 +92,21 @@ class RunTestConf extends Component {
     });
     // upload to store
     this.props.setRunTest(this.state.nameTest);
-    this.props.setTimeLastTest(time, this.state.keys);
-    this.props.getTimeTest('Working...', this.state.keys);
+    if(this.props.drive === 'normal-data'){
+      this.props.setTimeLastTest(time, this.state.keys, 0);
+      this.props.getTimeTest('Working...', this.state.keys, 0);
+      socket.emit('SC_BACKUP_TIMELASTTEST', { drive: this.props.drive, timeLastTest: this.state.timeLastTest[0]});
+    }
+
+    else if(this.props.drive === 'priority-data'){
+      this.props.setTimeLastTest(time, this.state.keys, 1);
+      this.props.getTimeTest('Working...', this.state.keys, 1);
+      socket.emit('SC_BACKUP_TIMELASTTEST', { drive: this.props.drive, timeLastTest: this.state.timeLastTest[1]});
+    }
+    
     console.log(this.state.keys);
     this.toggleT();
-    socket.emit('SC_BACKUP_TIMELASTTEST', this.state.timeLastTest);
-    socket.emit('SC_RUN_LaravelDusk', { nameTest : this.state.nameTest, keys : this.state.keys});
+    socket.emit('SC_RUN_LaravelDusk', { drive: this.props.drive, nameTest : this.state.nameTest, keys : this.state.keys});
     socket.on('SC_STATUS_TEST_DATA', (data)=>{
       if(data.status === 'stop')
       {
@@ -108,7 +117,6 @@ class RunTestConf extends Component {
       }
       console.log(data.status);
     });
-    // sendSocket();
   }
   
   componentDidUpdate(prevProps, prevState){

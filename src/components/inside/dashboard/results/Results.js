@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import {socket} from '../../SocketIO';
+import {socket} from '../../../SocketIO';
 
 import Pass from './Pass';
 import Fails from './Fails';
 import Error from './Error';
 
-import {getResTest} from '../../../actions/GetSaveData';
+import {getResTest} from '../../../../actions/GetSaveData';
 
 class Results extends Component {
   componentDidMount(){

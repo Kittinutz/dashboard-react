@@ -2,19 +2,20 @@ import React, { Component } from 'react';
 import {socket} from '../SocketIO';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import { Button, ButtonGroup, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Collapse, ButtonGroup, Button} from 'reactstrap';
+
+import Menu from './sidebar-menu/Menu';
 
 import {setNewPJs} from '../../actions/TesterAction';
 
 class Sidebar extends Component {
 
-    constructor(props) {
+  constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
-    // this.selectPJs = this.selectPJs.bind(this);
     this.state = {
       projects: null,
-      dropdownOpen: false
+      collapse: false
     };
   }
 
@@ -25,25 +26,22 @@ class Sidebar extends Component {
       }
       else{
         return (
-          <DropdownItem key={i} onClick={this.selectPJs.bind(this, namePJ)}>{namePJ}</DropdownItem>
+          <Button className="menu-pjs" key={i} onClick={this.selectPJs.bind(this, namePJ)}>{namePJ}</Button>
         )
       }
     });
+    
     return (
         <div>
             <ul className="navbar-nav bg-dark navbar-sidenav sdow-sidenav">
               <ButtonGroup className="nav-item" vertical>
-                <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                  <DropdownToggle  className="bg-vdark bt-bth" caret>
-                  Select Your Test Driven
-                  </DropdownToggle>
-                  <DropdownMenu>
-                    {listPJs}
-                  </DropdownMenu>
-                </ButtonDropdown>
-                <Button className="bg-vdark bt-btg">Dashboard</Button>
-                <Button className="bg-vdark bt-btg">Test Engine</Button>
-                <Button className="bg-vdark bt-btg">Case Lists</Button>
+                <Button onClick={this.toggle} className="bg-vdark bt-bth">
+                  Choose! You Test Driven
+                </Button>
+                <Collapse className="menu-pjs" isOpen={this.state.collapse} >
+                  {listPJs}
+                </Collapse>
+                <Menu className="nav-item"/>
               </ButtonGroup>
             </ul>
         </div>
@@ -51,15 +49,14 @@ class Sidebar extends Component {
   }
 
   toggle() {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen
-    });
+    this.setState({ collapse: !this.state.collapse });
   }
 
   selectPJs(namePJ){
+    this.toggle();
     this.props.setNewPJs(namePJ);
     socket.emit('SC_SENDNAMEPJs', namePJ);
-    console.log('Selected : '+namePJ);
+    console.log('Selected : '+namePJ);  
   }
 
 }

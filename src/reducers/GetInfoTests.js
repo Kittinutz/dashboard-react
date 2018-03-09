@@ -14,12 +14,11 @@ export const GetInfoTests=(state=storeTestsCase, action)=>{
             
             break;
         case "GET_LISTPROJECTS":
-            
             state={
                 ...state,
                 listPJs: action.payload
             }
-            break;    
+            break;
         default:
     }
     return state;

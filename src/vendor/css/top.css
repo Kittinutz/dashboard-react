@@ -30,27 +30,55 @@
 
 .bt-bth{
     border: 0px;
-    border-color: rgb(38, 65, 65);
     background: linear-gradient(to right, rgb(213, 69, 226), rgba(184, 75, 160, 0.35));
     box-shadow: 0px 0px 3px 2px rgb(255, 99, 229);
     text-shadow: -2px 2px black, 0 1px black, 1px 0 black, 0 -1px black;
     font-size: 14pt;
+    font-variant: small-caps; 
     padding: 14px;
     font-weight: bold;
+    color: white;
 }
 
 .bt-btg{
-    border: 0px;
-    border-color: rgb(38, 65, 65);
-    background: linear-gradient(to right, rgb(213, 69, 226), rgba(184, 75, 160, 0.35));
-    box-shadow: 0px 0px 3px 2px rgb(255, 99, 229);
     text-shadow: -2px 2px black, 0 1px black, 1px 0 black, 0 -1px black;
     font-size: 14pt;
+    border-width : 2px 2px 2px 50px;
     padding: 10px;
     letter-spacing: 5pt;
     font-variant: small-caps;    
     font-weight: bold;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.menu-pjs{
+    background-color: rgb(255, 255, 255);
+    border: 0px;
+    color:rgb(147, 9, 165);
+    text-shadow: -1px 0px rgb(77, 6, 95), 0 1px rgb(77, 6, 95), 1px 0 rgb(77, 6, 95), 0 -1px rgb(77, 6, 95);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    letter-spacing: 1.5pt;
+    
+}
+
+.menubar-item{
+    width: 100%;
+}
+
+.menubar-item .dashboard{
+    border-color: rgb(61, 202, 207);
+    margin-top: 2.5px;
+    box-shadow: 0px 0px 2.5px 1px rgba(0, 238, 255, 0.651);
+}
+
+.menubar-item .test-engine{
+    border-color: rgb(195, 209, 67);
+    box-shadow: 0px 0px 2.5px 1px rgba(238, 255, 0, 0.788);
+}
+
+.menubar-item .case-lists{
+    border-color: rgb(78, 214, 135);
+    box-shadow: 0px 0px 2.5px 1px rgba(0, 255, 128, 0.808);
 }
 
 .tx-white{
