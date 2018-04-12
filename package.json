@@ -2,7 +2,7 @@
   "name": "dashboard-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://him-2c.github.io/dashboard-react/",
+  "homepage": "https://him-2c.github.io/dashboard-react/",
   "dependencies": {
     "bootstrap": "^4.0.0-beta.3",
     "gh-pages": "^1.1.0",
@@ -15,11 +15,11 @@
     "socket.io": "^2.0.4"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   }
 }

@@ -24,6 +24,7 @@ class RunTestConf extends Component {
       nameFile: this.props.runTest.nameTest,
       nameTest: this.props.nameTest,
       timeLastTest: this.props.backup.timeLastTest,
+
       keys: this.props.keys,
       state: null
     };
@@ -143,7 +144,8 @@ function mapStatetoProps(state){
   return {
     ...state,
     runTest: state.runTest,
-    backup: state.backup
+    backup: state.backup,
+    getInfo: state.getInfo
   }
 }
 
