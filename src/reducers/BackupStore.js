@@ -1,16 +1,16 @@
-const infomations={
-    timeLastTest : [],
+const infomations = {
+    timeLastTest: [],
     timeTest: [],
     caseStatus: [],
-    testStatus:{
+    testStatus: {
         pass: 0,
         fails: 0,
         err: 0,
     }
 }
 
-export const BackupStore=(state=infomations, action)=>{
-    switch(action.type){
+export const BackupStore = (state = infomations, action) => {
+    switch (action.type) {
         case "GET_SAVE":
             state.timeLastTest = action.payloadTLT;
             state.timeTest = action.payloadTT;
@@ -18,26 +18,25 @@ export const BackupStore=(state=infomations, action)=>{
             state.testStatus.pass = action.payloadSPS;
             state.testStatus.fails = action.payloadSFS;
             state.testStatus.err = action.payloadSER;
-            break;
+            return state
 
         case "SET_LASTTEST":
-            state.timeLastTest[action.payloadArrID][action.payloadID] =  action.payloadTime;
-            break;
+            state.timeLastTest[action.payloadArrID][action.payloadID] = action.payloadTime;
         case "GET_SAVETIMETEST":
-            state.timeTest[action.drive][action.keys] =  action.payload;
-            break;
-        
+            state.timeTest[action.drive][action.keys] = action.payload;
+            return state
+
         case "GET_SAVETESTSTATUS":
             state.caseStatus[action.drive][action.keys] = action.payload;
-            break;
-        
+            return state
+
         case "GET_RESTEST":
             state.testStatus = {
                 pass: action.payloadPass,
                 fails: action.payloadFails,
                 err: action.payloadErr
             }
-            break;
+            return state
         default:
     }
     return state;

@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import {socket} from '../SocketIO';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import { Collapse, ButtonGroup, Button} from 'reactstrap';
+import { socket } from '../SocketIO';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Collapse, ButtonGroup, Button } from 'reactstrap';
 
 import Menu from './sidebar-menu/Menu';
 
-import {setNewPJs} from '../../actions/TesterAction';
+import { setNewPJs } from '../../actions/TesterAction';
 
 class Sidebar extends Component {
 
   constructor(props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
     this.state = {
       projects: null,
       collapse: false
@@ -20,58 +19,58 @@ class Sidebar extends Component {
   }
 
   render() {
-    const listPJs = this.props.getInfo.listPJs.map((namePJ, i) =>{
-      if(namePJ === null){
+    const listPJs = this.props.getInfo.listPJs.map((namePJ, i) => {
+      if (namePJ === null) {
         return "Not Found You Test Driven."
       }
-      else{
+      else {
         return (
-          <Button className="menu-pjs" key={i} onClick={this.selectPJs.bind(this, namePJ)}>{namePJ}</Button>
+          <Button className="menu-pjs" key={i} onClick={this.selectPJs(namePJ)}>{namePJ}</Button>
         )
       }
     });
-    
+
     return (
-        <div>
-            <ul className="navbar-nav bg-dark navbar-sidenav sdow-sidenav">
-              <ButtonGroup className="nav-item" vertical>
-                <Button onClick={this.toggle} className="bg-vdark bt-bth">
-                  Choose! You Test Driven
+      <div>
+        <ul className="navbar-nav bg-dark navbar-sidenav sdow-sidenav">
+          <ButtonGroup className="nav-item" vertical>
+            <Button onClick={this.toggle} className="bg-vdark bt-bth">
+              Choose! You Test Driven
                 </Button>
-                <Collapse className="menu-pjs" isOpen={this.state.collapse} >
-                  {listPJs}
-                </Collapse>
-                <Menu className="nav-item"/>
-              </ButtonGroup>
-            </ul>
-        </div>
+            <Collapse className="menu-pjs" isOpen={this.state.collapse} >
+              {listPJs}
+            </Collapse>
+            <Menu className="nav-item" />
+          </ButtonGroup>
+        </ul>
+      </div>
     );
   }
 
-  toggle() {
+  toggle = () => {
     this.setState({ collapse: !this.state.collapse });
   }
 
-  selectPJs(namePJ){
+  selectPJs = (namePJ) => {
     this.toggle();
     this.props.setNewPJs(namePJ);
     socket.emit('SC_SENDNAMEPJs', namePJ);
-    console.log('Selected : '+namePJ);  
+    console.log('Selected : ' + namePJ);
   }
 
 }
 
-function mapStatetoProps(state){ 
+function mapStatetoProps=(state) => {
   return {
     ...state,
     getInfo: state.getInfo
   }
 }
 
-function mapDispatchtoProps(dispatch){ 
+function mapDispatchtoProps(dispatch) {
   return bindActionCreators(
     {
       setNewPJs: setNewPJs
     }, dispatch)
 }
-export default connect(mapStatetoProps, mapDispatchtoProps) (Sidebar);
+export default connect(mapStatetoProps, mapDispatchtoProps)(Sidebar);

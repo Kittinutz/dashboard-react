@@ -1,24 +1,21 @@
 //store
-const storeTestsCase={
-    nameTest : [],
-    listPJs : []
+const storeTestsCase = {
+    nameTest: [],
+    listPJs: []
 }
 
-export const GetInfoTests=(state=storeTestsCase, action)=>{
-    switch(action.type){
+export const GetInfoTests = (state = storeTestsCase, action) => {
+    switch (action.type) {
         case "GET_NAMETESTSCASE":
-            state={
+            return state = {
                 ...state,
                 nameTest: action.payload
             }
-            
-            break;
         case "GET_LISTPROJECTS":
-            state={
+            return state = {
                 ...state,
                 listPJs: action.payload
             }
-            break;
         default:
     }
     return state;
