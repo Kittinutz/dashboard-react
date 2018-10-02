@@ -60,7 +60,7 @@ class Sidebar extends Component {
 
 }
 
-function mapStatetoProps=(state) => {
+const mapStatetoProps = (state) => {
   return {
     ...state,
     getInfo: state.getInfo
