@@ -55,7 +55,6 @@ class Sidebar extends Component {
     this.toggle();
     this.props.setNewPJs(namePJ);
     socket.emit('SC_SENDNAMEPJs', namePJ);
-    console.log('Selected : ' + namePJ);
   }
 
 }

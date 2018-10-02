@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import {socket} from '../../SocketIO';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { socket } from '../../SocketIO';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import { 
-   Button, Popover, PopoverBody, PopoverHeader
- } from 'reactstrap';
- 
+import {
+  Button, Popover, PopoverBody, PopoverHeader
+} from 'reactstrap';
+
 //actions
-import {setRunTest, stopTest, setTimeLastTest} from '../../../actions/TesterAction';
-import {getTimeTest} from '../../../actions/GetSaveData';
+import { setRunTest, stopTest, setTimeLastTest } from '../../../actions/TesterAction';
+import { getTimeTest } from '../../../actions/GetSaveData';
 
 class RunTestConf extends Component {
   constructor(props) {
@@ -31,28 +31,28 @@ class RunTestConf extends Component {
 
   render() {
     return (
-        <div>  
-          <Button id={this.state.nameTest} color="danger" className="btn-table" onClick={this.selectPop.bind(this)}> RUN </Button>
-          <Popover className="popover-in-table" target={this.state.nameTest} placement="bottom" isOpen={this.state.popoverOpenT}  toggle={this.toggleT}>
-            <PopoverHeader> {this.state.nameTest} ?</PopoverHeader>
-            <PopoverBody>  
-                <Button className="btn-table right"
-                  onClick={this.toggleT}
-                >No</Button>
+      <div>
+        <Button id={this.state.nameTest} color="danger" className="btn-table" onClick={this.selectPop.bind(this)}> RUN </Button>
+        <Popover className="popover-in-table" target={this.state.nameTest} placement="bottom" isOpen={this.state.popoverOpenT} toggle={this.toggleT}>
+          <PopoverHeader> {this.state.nameTest} ?</PopoverHeader>
+          <PopoverBody>
+            <Button className="btn-table right"
+              onClick={this.toggleT}
+            >No</Button>
 
-                <Button color="success" className="btn-table right"  
-                  onClick={this.run1Test}
-                > Yes</Button>
-            </PopoverBody>
-          </Popover>
+            <Button color="success" className="btn-table right"
+              onClick={this.run1Test}
+            > Yes</Button>
+          </PopoverBody>
+        </Popover>
 
-          <Popover target={this.state.nameTest} placement="bottom" isOpen={this.state.popoverOpenF}  toggle={this.toggleF}>
-            <PopoverHeader> STOP!</PopoverHeader>
-            <PopoverBody>  
-              System working with {this.state.nameFile}.
+        <Popover target={this.state.nameTest} placement="bottom" isOpen={this.state.popoverOpenF} toggle={this.toggleF}>
+          <PopoverHeader> STOP!</PopoverHeader>
+          <PopoverBody>
+            System working with {this.state.nameFile}.
             </PopoverBody>
-          </Popover>
-        </div>
+        </Popover>
+      </div>
     );
   }
 
@@ -62,65 +62,63 @@ class RunTestConf extends Component {
     });
   }
 
-  toggleF(){
+  toggleF() {
     this.setState({
       popoverOpenF: !this.state.popoverOpenF
     });
   }
 
-  selectPop(){
-    if(this.state.running === false){
+  selectPop() {
+    if (this.state.running === false) {
       this.toggleT();
     }
-    else{
+    else {
       this.toggleF();
     }
   }
 
-  run1Test(){
+  run1Test() {
     var date = new Date(),
-        hh = (date.getHours()<10?'0':'') + date.getHours(),
-        mm = (date.getMinutes()<10?'0':'') + date.getMinutes(),
-        ss = (date.getSeconds()<10?'0':'') +date.getSeconds(),
-        d = (date.getDate()<10?'0':'') +date.getDate(),
-        m = ((date.getMonth()+1)<10?'0':'') +(date.getMonth()+1);
+      hh = (date.getHours() < 10 ? '0' : '') + date.getHours(),
+      mm = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes(),
+      ss = (date.getSeconds() < 10 ? '0' : '') + date.getSeconds(),
+      d = (date.getDate() < 10 ? '0' : '') + date.getDate(),
+      m = ((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1);
 
-    var time = hh+':'+mm+':'+ss+'-'+ d +'/'+ m +'/'+date.getFullYear();
+    var time = hh + ':' + mm + ':' + ss + '-' + d + '/' + m + '/' + date.getFullYear();
     this.setState({
       running: true,
       nameTest: this.state.nameTest
     });
     // upload to store
     this.props.setRunTest(this.state.nameTest);
-    if(this.props.drive === 'normal-data'){
+    if (this.props.drive === 'normal-data') {
       this.props.setTimeLastTest(time, this.state.keys, 0);
       this.props.getTimeTest('Working...', this.state.keys, 0);
-      socket.emit('SC_BACKUP_TIMELASTTEST', { drive: this.props.drive, timeLastTest: this.state.timeLastTest[0]});
+      socket.emit('SC_BACKUP_TIMELASTTEST', { drive: this.props.drive, timeLastTest: this.state.timeLastTest[0] });
     }
 
-    else if(this.props.drive === 'priority-data'){
+    else if (this.props.drive === 'priority-data') {
       this.props.setTimeLastTest(time, this.state.keys, 1);
       this.props.getTimeTest('Working...', this.state.keys, 1);
-      socket.emit('SC_BACKUP_TIMELASTTEST', { drive: this.props.drive, timeLastTest: this.state.timeLastTest[1]});
+      socket.emit('SC_BACKUP_TIMELASTTEST', { drive: this.props.drive, timeLastTest: this.state.timeLastTest[1] });
     }
-    
-    console.log(this.state.keys);
+
     this.toggleT();
-    socket.emit('SC_RUN_LaravelDusk', { drive: this.props.drive, nameTest : this.state.nameTest, keys : this.state.keys});
-    socket.on('SC_STATUS_TEST_DATA', (data)=>{
-      if(data.status === 'stop')
-      {
+    socket.emit('SC_RUN_LaravelDusk', { drive: this.props.drive, nameTest: this.state.nameTest, keys: this.state.keys });
+    socket.on('SC_STATUS_TEST_DATA', (data) => {
+      if (data.status === 'stop') {
         this.props.stopTest(this.state.nameTest);
         this.setState({
           status: data.status
         });
       }
-      console.log(data.status);
+
     });
   }
-  
-  componentDidUpdate(prevProps, prevState){
-    if(prevProps.runTest !== this.props.runTest){
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.runTest !== this.props.runTest) {
       this.setState({
         running: this.props.runTest.running,
         nameFile: this.props.runTest.nameTest,
@@ -128,8 +126,7 @@ class RunTestConf extends Component {
         popoverOpenF: false,
       });
     }
-    if(prevState.nameTest !== this.props.nameTest){
-      // console.log(prevState.nameTest);
+    if (prevState.nameTest !== this.props.nameTest) {
       this.setState({
         nameTest: this.props.nameTest,
         keys: this.props.keys,
@@ -139,7 +136,7 @@ class RunTestConf extends Component {
   }
 }
 
-function mapStatetoProps(state){ 
+function mapStatetoProps(state) {
   return {
     ...state,
     runTest: state.runTest,
@@ -147,7 +144,7 @@ function mapStatetoProps(state){
   }
 }
 
-function mapDispatchtoProps(dispatch){ 
+function mapDispatchtoProps(dispatch) {
   return bindActionCreators(
     {
       setRunTest: setRunTest,
@@ -157,4 +154,4 @@ function mapDispatchtoProps(dispatch){
     }, dispatch)
 }
 
-export default connect(mapStatetoProps, mapDispatchtoProps) (RunTestConf);
+export default connect(mapStatetoProps, mapDispatchtoProps)(RunTestConf);
